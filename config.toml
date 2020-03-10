@@ -1,4 +1,4 @@
-baseURL = "dfigueredo.github.io/"
+baseURL = ""
 languageCode = "es-ES"
 title = "Blg0"
 theme = "darfig-hugo-theme"

@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blg0</title>
-    <link>dfigueredo.github.io/</link>
+    <link>/</link>
     <description>Recent content on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
     <lastBuildDate>Thu, 05 Mar 2020 21:32:29 +0100</lastBuildDate>
     
-	<atom:link href="dfigueredo.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>dfigueredo.github.io/about/</link>
+      <link>/about/</link>
       <pubDate>Thu, 05 Mar 2020 21:32:29 +0100</pubDate>
       
-      <guid>dfigueredo.github.io/about/</guid>
+      <guid>/about/</guid>
       <description>Acerca de mi </description>
     </item>
     
     <item>
       <title>Desactivar el incio de entorno gráfico por defecto</title>
-      <link>dfigueredo.github.io/posts/desactivar__grafico_por_defecto/</link>
+      <link>/posts/desactivar__grafico_por_defecto/</link>
       <pubDate>Fri, 28 Apr 2017 22:12:57 +0100</pubDate>
       
-      <guid>dfigueredo.github.io/posts/desactivar__grafico_por_defecto/</guid>
+      <guid>/posts/desactivar__grafico_por_defecto/</guid>
       <description>En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.
 Iniciamos Modificando opciones de arranque Necesitaremos tener permisos ya sea como root, o con acceso a sudo.</description>
     </item>
     
     <item>
       <title>Trabaja en github con autenticación por ssh</title>
-      <link>dfigueredo.github.io/posts/github_con_autenticacion_ssh/</link>
+      <link>/posts/github_con_autenticacion_ssh/</link>
       <pubDate>Sun, 23 Apr 2017 22:12:01 +0100</pubDate>
       
-      <guid>dfigueredo.github.io/posts/github_con_autenticacion_ssh/</guid>
+      <guid>/posts/github_con_autenticacion_ssh/</guid>
       <description>Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.
 Proceso Creando una clave ssh Si no se ha generado anteriormente el primer paso es generar nuestras claves privada y pública, que se almacenarán en el directorio oculto: ~/.ssh. Podemos generar nuestras claves mediante:
 cd ~/.ssh ssh-keygen #nos pedirá el nombre de los archivos que lo dejaremos por defecto #también una contraseña para cifrar nuestra clave, muy recomendable cat id_rsa.pub #esto nos muestra la clave pública El contenido de id_rsa.</description>
@@ -43,10 +43,10 @@ cd ~/.ssh ssh-keygen #nos pedirá el nombre de los archivos que lo dejaremos por
     
     <item>
       <title>Mysql desde tu shell</title>
-      <link>dfigueredo.github.io/posts/mysql_dese_tu_shell/</link>
+      <link>/posts/mysql_dese_tu_shell/</link>
       <pubDate>Mon, 13 Mar 2017 22:08:06 +0100</pubDate>
       
-      <guid>dfigueredo.github.io/posts/mysql_dese_tu_shell/</guid>
+      <guid>/posts/mysql_dese_tu_shell/</guid>
       <description>De que va esto Levantar un servidor MySQL para tus proyectos es tan sencillo como tener cualquier distribución GNU/linux o similares y asegurarte de seguir algunos pasos sencillos.
 Primero lo primero Instalando Segun tu sistema(y si no lo tienes instalado) tendrás que utilizar:
 apt-get -y install mysql-server #instalar service mysql start #añadir al arranque yum install mysql-server #instalar /sbin/service mysqld start #arrancar chkconfig mysqld on #añadir al arranque O similares para otros sistemas.</description>
