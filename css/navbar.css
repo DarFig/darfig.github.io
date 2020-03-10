@@ -1,0 +1,81 @@
+.lateral-navbar{
+    position: fixed;
+    background-color: var(--purpuraOscuro);
+    transition: width 600ms ease;
+    z-index: 9999;
+}
+
+
+.lateral-navbar-nav{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    
+}
+
+.lateral-nav-link{
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    text-decoration: none;
+    filter: grayscale(100%) opacity(0.7);
+    transition: var(--transition-speed);
+
+}
+.lateral-nav-link:hover {
+    filter: grayscale(0%) opacity(1);
+    background: var(--blanco);
+    
+}
+.lateral-nav-text{
+    display: none;
+    margin-left: 1rem;
+}
+.lateral-nav-link png{
+    min-width: 2rem;
+    margin: 0 1.5rem;
+}
+/* Small screens */
+@media only screen and (max-width: 800px){
+    .lateral-navbar{
+        bottom:0;
+        width: 100vh;
+        height: 5rem;
+    }
+    .lateral-navbar-nav{
+        flex-direction: row;
+    }
+    .lateral-nav-link{
+        justify-content: center;
+    }
+    .lateral-navbar:hover .lateral-nav-text{
+        display: inline;
+    }
+    .lateral-navbar:hover .nav-img{
+        display: none;/*hiden image*/
+    }
+}
+
+/* large screens */
+@media only screen and (min-width: 800px){
+    .lateral-navbar{
+        top:0;
+        width: 5rem;
+        height: 100vh;
+        
+    }
+    .lateral-navbar:hover{
+        width: 16rem;
+    }
+    .lateral-navbar:hover .lateral-nav-text{
+        display: inline;
+    }
+    .lateral-nav-item{
+        width: 100%;
+    }
+    
+}
