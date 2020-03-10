@@ -1,0 +1,25 @@
+
+<div class="column">
+    
+    <div class="card grisClaro bordeVerde" >
+        {{ if .Params.image   }}
+        <div class="card-image">
+            <img src="{{ .Params.image | absURL }}" class="imgP card-img-top text-center" alt="img">
+        </div>
+        {{ end }}
+        
+        <div class="card-content">
+            <h5 class="start2p title is-5">{{ .Title }}</h5>
+            <div class="content">
+               <p> {{ .Summary }} </p>
+            </div>
+            <a href="{{ .Permalink }}">Continuar</a>  
+        </div>
+        <div class="card-footer">
+            <small class="card-footer-itme centrar">{{ dateFormat "January 2 - 2006" .Date }}</small>
+        </div>
+    </div>
+    
+</div>
+<!--  -->
+          

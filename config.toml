@@ -1,0 +1,10 @@
+baseURL = "dfigueredo.github.io/"
+languageCode = "es-ES"
+title = "Blg0"
+theme = "darfig-hugo-theme"
+
+
+[params]
+    UserIcon = "https://avatars2.githubusercontent.com/u/13577926?s=460&v=4"
+    AuthorName = "Darfig"
+    GitHubuser = "darfig"

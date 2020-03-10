@@ -1,0 +1,53 @@
+{{ define "main" }}
+<div role="main" class="sourceCode section">
+    <div class=" columns ">
+      <div class="column is-2">
+              
+      </div>
+      
+      <div class="column is-8 " >
+          <div class="negro bordeVerde">
+          <div class=" column textoCentrado">
+              <h3 class="textoVerde start2p title is-3">Últimos Proyectos</h3>
+          </div>
+          </div>
+          <div class="column"></div>
+          <!-- Proy -->
+          <div class="columns">
+            
+            <!-- render preview list of projects -->
+            {{ range  first 2 (where .Site.RegularPages "Section" "projects") }}
+              {{ partial "projectPreview.html" . }}
+            {{end}}
+            
+          </div>
+          <div class="centrar textoCentrado">
+            <a class="centrar" href="/projects/"><span class="textoCentrado start2p">...</span></a>
+            <br>
+          </div>
+          
+          <!-- Post prevw -->
+          <div class="negro bordeVerde">
+          <div class="column textoCentrado ">
+              <h3 class="textoVerde start2p title is-3 ">Últimas Entradas</h3>
+            
+          </div>
+          
+        </div>
+        <!-- render preview list of projects -->
+        {{ range  first 5 (where .Site.RegularPages "Section" "posts") }}
+        {{ partial "postPreview.html" . }}
+        {{end}}
+        <div class="centrar textoCentrado">
+          <a class="centrar" href="/posts/"><span class="textoCentrado start2p">...</span></a>
+          <br>
+        </div>
+      </div>
+      
+      
+    </div>
+
+
+
+</div>
+{{ end }}

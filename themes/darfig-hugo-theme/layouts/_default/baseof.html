@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html class=" negro" lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}es-ES{{ end }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="witdth=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Press+Start+2P|Source+Code+Pro&display=swap" rel="stylesheet"> 
+   
+    <link rel="stylesheet" href="/css/bulma.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    
+    {{- partial "head.html" . -}}
+    <body class="grisOscuro">
+        
+        {{- partial "navbar.html" . -}}
+        {{- partial "header.html" . -}}
+        <div id="content">
+            
+        <h1></h1>
+        {{- block "main" . }}{{- end }}
+        </div>
+        
+    <div class="alpie"></div>   
+    </body>
+    
+    {{- partial "footer.html" . -}}
+        
+</html>

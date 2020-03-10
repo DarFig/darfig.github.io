@@ -1,0 +1,43 @@
+{{ define "main" }}
+
+<div role="main" class="sourceCode section">
+    <div class=" columns ">
+        <div class="column is-2">
+            
+        </div>
+        <div class="column is-8">
+            <div class="negro bordeVerde">
+                <div class=" column textoCentrado">
+                    <h3 class="textoVerde start2p title is-4">Entradas</h3>
+                </div>
+            </div>
+    
+            {{ range .Pages }}
+
+            <div class="column">
+                <div class="card grisClaro bordeVerde">
+                    <div class="start2p card-header">
+                        <p class="card-header-title is-centered">
+                        {{ .Title }}
+                        </p>
+                    </div>
+                    <div class="card-content">
+                    
+                    
+                    <p class="content">{{ .Summary }}</p>
+                    
+                    
+                    <a href="{{ .Permalink }}">Continuar</a>
+                    </div>
+                    <div class="card-footer">
+                        {{ dateFormat "January 2 - 2006" .Date }}
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+
+    </div>
+</div>
+
+{{ end }}
