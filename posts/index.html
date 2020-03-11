@@ -93,13 +93,42 @@
             </p>
         </div>
         <div class="card-content">
+            
+            
+            
+            <div class="">
+                        
+                <div class="content">
+                <p>En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación
+específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea
+en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno
+para momentos muy específicos. De esta manera llegué a la duda de como desactivar el
+entorno gráfico pero dejarlo instalado para cuando lo necesite.</p>
+<h2 id="iniciamos">Iniciamos</h2>
+<h3 id="modificando-opciones-de-arranque">Modificando opciones de arranque</h3>
+<p>Necesitaremos tener permisos ya sea como root, o con acceso a sudo.
+Entramos en la consola y modificaremos con nuestro editor favorito (vi, nano, etc)
+el fichero <em>/etc/inittab</em> .
+Una de las primeras lineas es <em>id:2:initdefault:</em> , o algo similar y lo sustituimos
+por  <em>id:3:initdefault:</em> , básicamente es cambiar el 2 por el 3. XD</p>
+<p>Ahora modifiquemos el gestor de sesión .Cambiamos de directorio a <em>/etc/rc3.d</em>.
+Si ejecutamos un <em>ls -l</em> o  <em>ls -al</em> , veremos dependiendo de si tenemos GNOME, XFCE,
+u otros uno de los siguientes archivos: <em>S19gdm3</em>, <em>S04lightdm</em> o similares, y debemos
+sustituir la <em>S</em> por una <em>k</em>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  mv S19gdm3 K19gdm3 <span style="color:#75715e">#según sea el caso</span>
+  mv S04lightdm  K04lightdm
+
+</code></pre></div><p>Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno
+gráfico en cualquier momento utilizando el comando <em>startx</em>, o ejecuntando nuestro gestor
+por ejemplo <em>/etc/init.d/gdm3 start</em> .</p>
+<p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+
+                </div>
+                <br>
+            </div>
         
-            <p class="content">En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.
-Iniciamos Modificando opciones de arranque Necesitaremos tener permisos ya sea como root, o con acceso a sudo.</p>
-        
-        
-        
-            <a href="/posts/desactivar__grafico_por_defecto/">Continuar</a>
+            
         </div>
         <div class="card-footer">
             <small class="card-footer-itme centrar">April 28 - 2017</small>
@@ -118,14 +147,50 @@ Iniciamos Modificando opciones de arranque Necesitaremos tener permisos ya sea c
             </p>
         </div>
         <div class="card-content">
+            
+            
+            
+            <div class="">
+                        
+                <div class="content">
+                <p>Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.</p>
+<h2 id="proceso">Proceso</h2>
+<h3 id="creando-una-clave-ssh">Creando una clave ssh</h3>
+<p>Si no se ha generado anteriormente el primer paso es generar nuestras claves
+privada y pública, que se almacenarán en el directorio oculto: ~/.ssh. Podemos
+generar nuestras claves mediante:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  cd ~/.ssh
+  ssh-keygen <span style="color:#75715e">#nos pedirá el nombre de los archivos que lo dejaremos por defecto</span>
+             <span style="color:#75715e">#también una contraseña para cifrar nuestra clave, muy recomendable</span>
+  cat id_rsa.pub <span style="color:#75715e">#esto nos muestra la clave pública</span>
+
+</code></pre></div><p>El contenido de id_rsa.pub es nuestra clave pública, su contenido en total es
+lo que debemos llevar a nuestro perfil de GitHub: dentro de Settings, SSH and GPG keys
+creamos una nueva clave ssh y pegamos el contenido.</p>
+<h3 id="agregando-nuestra-clave-al-agente">Agregando nuestra clave al agente</h3>
+<p>Para que nuestra autenticación funcione debemos agregar nuestra clave privada
+al agente ssh.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  eval <span style="color:#66d9ef">$(</span>ssh-agent -s<span style="color:#66d9ef">)</span> <span style="color:#75715e">#iniciamos el agente de ssh</span>
+  ssh-add ~/.ssh/id_rsa <span style="color:#75715e">#agregamos la clave privada al agente</span>
+                        <span style="color:#75715e">#nos pedirá la contraseña con la que lo ciframos</span>
+</code></pre></div><h3 id="trabajando-con-ssh">Trabajando con ssh</h3>
+<p>La proxima vez que clones un repositorio a local utiliza su dirección ssh, que a
+diferencia de la https utiliza un formato <strong><a href="mailto:git@github.com">git@github.com</a>:user/repositorio.git</strong>
+El resto del funcionamiento es identico, salvo que no tienes que recurrir a la
+autenticación por contraseña.
+Si quieres cambiar la dirección de un repositorio en local entre https o ssh
+siempre puede recurir a:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git
+    <span style="color:#75715e">#o</span>
+    git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+</code></pre></div><p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+
+                </div>
+                <br>
+            </div>
         
-            <p class="content">Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.
-Proceso Creando una clave ssh Si no se ha generado anteriormente el primer paso es generar nuestras claves privada y pública, que se almacenarán en el directorio oculto: ~/.ssh. Podemos generar nuestras claves mediante:
-cd ~/.ssh ssh-keygen #nos pedirá el nombre de los archivos que lo dejaremos por defecto #también una contraseña para cifrar nuestra clave, muy recomendable cat id_rsa.pub #esto nos muestra la clave pública El contenido de id_rsa.</p>
-        
-        
-        
-            <a href="/posts/github_con_autenticacion_ssh/">Continuar</a>
+            
         </div>
         <div class="card-footer">
             <small class="card-footer-itme centrar">April 23 - 2017</small>
@@ -144,14 +209,44 @@ cd ~/.ssh ssh-keygen #nos pedirá el nombre de los archivos que lo dejaremos por
             </p>
         </div>
         <div class="card-content">
+            
+            
+            
+            <div class="">
+                        
+                <div class="content">
+                <h2 id="de-que-va-esto">De que va esto</h2>
+<p>Levantar un servidor <strong>MySQL</strong> para tus proyectos es tan sencillo como tener cualquier distribución GNU/linux
+o similares y asegurarte de seguir algunos pasos sencillos.</p>
+<h2 id="primero-lo-primero">Primero lo primero</h2>
+<h5 id="instalando"><strong>Instalando</strong></h5>
+<p>Segun tu sistema(y si no lo tienes instalado) tendrás que utilizar:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  apt-get -y install mysql-server <span style="color:#75715e">#instalar</span>
+  service mysql start <span style="color:#75715e">#añadir al arranque</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  yum install mysql-server <span style="color:#75715e">#instalar</span>
+  /sbin/service mysqld start <span style="color:#75715e">#arrancar</span>
+  chkconfig mysqld on <span style="color:#75715e">#añadir al arranque</span>
+</code></pre></div><p>O similares para otros sistemas.</p>
+<h2 id="pasemos-al-uso">Pasemos al uso</h2>
+<h3 id="configuración">Configuración</h3>
+<p>Primeramente el root tendrá los permisos y deberás crear las bases y configurar los permisos para otros
+usuarios usando esta cuenta.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  mysql -u root -p <span style="color:#75715e">#acceso  con la cuenta root</span>
+</code></pre></div><p><strong>Ahora pasamos a un poco de mysql</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">  <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> nombreEjemplo; <span style="color:#f92672">--</span>nueva base
+  <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">USAGE</span> <span style="color:#66d9ef">ON</span> nombreEjemplo.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> nombreUsuario<span style="color:#f92672">@</span>localhost <span style="color:#66d9ef">IDENTIFIED</span> <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;password&#39;</span>; <span style="color:#f92672">--</span>credenciales para otro usuario
+  <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">ALL</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">ON</span> nombreEjemplo.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> nombreUsuario<span style="color:#f92672">@</span>localhost ; <span style="color:#f92672">--</span>cuidado con los privilegios, esto es un ejemplo
+  <span style="color:#66d9ef">FLUSH</span> <span style="color:#66d9ef">PRIVILEGES</span>;
+</code></pre></div><p>Ya lo tenemos configurado, ahora podemos acceder con nuestras <em>nuevas credenciales</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  mysql -u nombreUsuario -p<span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#e6db74">&#39;nombreEjemplo&#39;</span>
+</code></pre></div><p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+
+                </div>
+                <br>
+            </div>
         
-            <p class="content">De que va esto Levantar un servidor MySQL para tus proyectos es tan sencillo como tener cualquier distribución GNU/linux o similares y asegurarte de seguir algunos pasos sencillos.
-Primero lo primero Instalando Segun tu sistema(y si no lo tienes instalado) tendrás que utilizar:
-apt-get -y install mysql-server #instalar service mysql start #añadir al arranque yum install mysql-server #instalar /sbin/service mysqld start #arrancar chkconfig mysqld on #añadir al arranque O similares para otros sistemas.</p>
-        
-        
-        
-            <a href="/posts/mysql_dese_tu_shell/">Continuar</a>
+            
         </div>
         <div class="card-footer">
             <small class="card-footer-itme centrar">March 13 - 2017</small>
