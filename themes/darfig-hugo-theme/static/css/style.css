@@ -85,3 +85,8 @@ body::-webkit-scrollbar-thumb{
     right: 0;
     top:0;
 }
+
+.formatoTexto{
+    text-align: justify;
+    font-size: smaller;
+}
