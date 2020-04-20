@@ -10,6 +10,8 @@ en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este 
 para momentos muy específicos. De esta manera llegué a la duda de como desactivar el
 entorno gráfico pero dejarlo instalado para cuando lo necesite.
 
+<!--more-->
+
 ## Iniciamos
 ### Modificando opciones de arranque
 
@@ -18,6 +20,7 @@ Entramos en la consola y modificaremos con nuestro editor favorito (vi, nano, et
 el fichero */etc/inittab* .
 Una de las primeras lineas es *id:2:initdefault:* , o algo similar y lo sustituimos
 por  *id:3:initdefault:* , básicamente es cambiar el 2 por el 3. XD
+
 
 Ahora modifiquemos el gestor de sesión .Cambiamos de directorio a */etc/rc3.d*.
 Si ejecutamos un *ls -l* o  *ls -al* , veremos dependiendo de si tenemos GNOME, XFCE,
@@ -29,6 +32,7 @@ sustituir la *S* por una *k*.
   mv S04lightdm  K04lightdm
 
 ```
+
 Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno
 gráfico en cualquier momento utilizando el comando *startx*, o ejecuntando nuestro gestor
 por ejemplo */etc/init.d/gdm3 start* .

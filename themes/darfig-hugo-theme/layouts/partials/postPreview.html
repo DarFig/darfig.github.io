@@ -7,20 +7,16 @@
             </p>
         </div>
         <div class="card-content">
-            <!-- no se renderiza correctamente este resumen como html
-            se muestra todo el texto y los títulos apelotonado, lo pongo
-             completo hasta que vea una solución-->
-            <!--p class="content">{{ .Summary }}</p-->
             
             <div class="">
                         
                 <div class="content">
-                {{ .Content }}
+                    {{ .Summary }}
                 </div>
                 <br>
             </div>
         
-            <!--a href="{{ .Permalink }}">Continuar</a-->
+            <a href="{{ .Permalink }}">Continuar</a>
         </div>
         <div class="card-footer">
             <small class="card-footer-itme centrar">{{ dateFormat "January 2 - 2006" .Date }}</small>

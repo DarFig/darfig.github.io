@@ -14,6 +14,8 @@ Si no se ha generado anteriormente el primer paso es generar nuestras claves
 privada y pública, que se almacenarán en el directorio oculto: ~/.ssh. Podemos
 generar nuestras claves mediante:
 
+<!--more-->
+
 ```shell
   cd ~/.ssh
   ssh-keygen #nos pedirá el nombre de los archivos que lo dejaremos por defecto
@@ -21,6 +23,7 @@ generar nuestras claves mediante:
   cat id_rsa.pub #esto nos muestra la clave pública
 
 ```
+
 El contenido de id_rsa.pub es nuestra clave pública, su contenido en total es
 lo que debemos llevar a nuestro perfil de GitHub: dentro de Settings, SSH and GPG keys
 creamos una nueva clave ssh y pegamos el contenido.
