@@ -2,7 +2,7 @@ baseURL = ""
 languageCode = "es-ES"
 title = "Blg0"
 theme = "darfig-hugo-theme"
-
+publishdir = "."
 
 [params]
     UserIcon = "https://avatars2.githubusercontent.com/u/13577926?s=460&v=4"
