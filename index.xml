@@ -17,7 +17,8 @@
       <pubDate>Thu, 05 Mar 2020 21:32:29 +0100</pubDate>
       
       <guid>/about/</guid>
-      <description>Acerca de mi </description>
+      <description>Acerca de mi Soy Ingeniero informático, en la especialidad Ingeniería de Computadores.
+Actualmente trabajo como ingeniero de sistemas, y sysadmin de un clúster de supercomputación 🤓.</description>
     </item>
     
     <item>
@@ -26,11 +27,7 @@
       <pubDate>Fri, 28 Apr 2017 22:12:57 +0100</pubDate>
       
       <guid>/posts/desactivar__grafico_por_defecto/</guid>
-      <description>&lt;p&gt;En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación
-específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea
-en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno
-para momentos muy específicos. De esta manera llegué a la duda de como desactivar el
-entorno gráfico pero dejarlo instalado para cuando lo necesite.&lt;/p&gt;</description>
+      <description>&lt;p&gt;En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -42,9 +39,7 @@ entorno gráfico pero dejarlo instalado para cuando lo necesite.&lt;/p&gt;</desc
       <description>&lt;p&gt;Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.&lt;/p&gt;
 &lt;h2 id=&#34;proceso&#34;&gt;Proceso&lt;/h2&gt;
 &lt;h3 id=&#34;creando-una-clave-ssh&#34;&gt;Creando una clave ssh&lt;/h3&gt;
-&lt;p&gt;Si no se ha generado anteriormente el primer paso es generar nuestras claves
-privada y pública, que se almacenarán en el directorio oculto: ~/.ssh. Podemos
-generar nuestras claves mediante:&lt;/p&gt;</description>
+&lt;p&gt;Si no se ha generado anteriormente el primer paso es generar nuestras claves privada y pública, que se almacenarán en el directorio oculto: &lt;strong&gt;~/.ssh&lt;/strong&gt;. Podemos generar nuestras claves mediante:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -54,8 +49,7 @@ generar nuestras claves mediante:&lt;/p&gt;</description>
       
       <guid>/posts/mysql_dese_tu_shell/</guid>
       <description>&lt;h2 id=&#34;de-que-va-esto&#34;&gt;De que va esto&lt;/h2&gt;
-&lt;p&gt;Levantar un servidor &lt;strong&gt;MySQL&lt;/strong&gt; para tus proyectos es tan sencillo como tener cualquier distribución GNU/linux
-o similares y asegurarte de seguir algunos pasos sencillos.&lt;/p&gt;</description>
+&lt;p&gt;Levantar un servidor &lt;strong&gt;MySQL&lt;/strong&gt; para tus proyectos es tan sencillo como tener cualquier distribución GNU/linux o similares y asegurarte de seguir algunos pasos sencillos.&lt;/p&gt;</description>
     </item>
     
   </channel>
