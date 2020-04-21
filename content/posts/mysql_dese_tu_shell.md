@@ -5,12 +5,14 @@ draft: false
 ---
 
 ## De que va esto
+
 Levantar un servidor **MySQL** para tus proyectos es tan sencillo como tener cualquier distribución GNU/linux o similares y asegurarte de seguir algunos pasos sencillos.
 
 <!--more-->
 
 ## Primero lo primero
 ##### **Instalando**
+
 Segun tu sistema(y si no lo tienes instalado) tendrás que utilizar:
 
 ```shell
