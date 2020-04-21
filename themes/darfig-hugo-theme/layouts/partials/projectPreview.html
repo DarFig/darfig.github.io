@@ -4,7 +4,7 @@
     <div class="card grisClaro bordeVerde" >
         {{ if .Params.image   }}
         <div class="card-image">
-            <img src="{{ .Params.image | absURL}}" class="imgP card-img-top text-center" alt="img">
+            <img src="/{{ .Params.image | absURL }}" class="imgP card-img-top text-center" alt="img">
         </div>
         {{ end }}
         
