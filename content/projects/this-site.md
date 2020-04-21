@@ -2,10 +2,10 @@
 title: "Este sitio"
 date: 2020-04-21T13:23:06+02:00
 draft: false
-image: "projects/gopher-side_color.svg"
+image: "gopher-side_color.svg"
 ---
 
-## Este sitio
+## El proyecto
 
 Este sitio es más que nada un pequeño proyecto para incluir a su vez otro. Me refiero a la creación de un tema personalizado de [**gohugo**](https://gohugo.io), para utilizarlo personalmente.
 
