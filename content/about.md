@@ -5,8 +5,6 @@ draft: false
 type: "about"
 ---
 
-## Acerca de mi
+## 
 
-Soy Ingeniero informático, en la especialidad *Ingeniería de Computadores*.
-
-Actualmente trabajo como ingeniero de sistemas, y *sysadmin* de un clúster de supercomputación &#129299;.
+ *Computer engineering* and *sysadmin* &#129299;.

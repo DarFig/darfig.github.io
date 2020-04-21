@@ -11,9 +11,24 @@
                     <h3 class="textoVerde start2p title is-4">Proyectos</h3>
                 </div>
             </div>
-            {{ range (where .Site.RegularPages "Section" "projects") }}
+            {{ range (where (.Paginate .Site.RegularPages).Pages "Section" "projects") }}
                 {{ partial "projectPreview.html" . }}
             {{end}}
+
+            <div class="pagination negro start2p textoVerde bordeVerde"  role="navigation">
+                <div class="column is-4">
+                {{ if .Paginator.HasPrev }}
+                    <a href="{{ .Paginator.Prev.URL }}" class="pagination-previous textoVerde bordeVerde">&#11013;</a>
+                {{ end }}
+                </div>
+                <div class="column is-4">
+                <span class="pagination-ellipsis textoVerde">{{ .Paginator.PageNumber }}</span>
+                </div>
+                <div class="column is-4">
+                {{ if .Paginator.HasNext }}
+                    <a href="{{ .Paginator.Next.URL }}" class="pagination-next textoVerde bordeVerde">&#10145;</a>
+                {{ end }}
+            </div>
         </div>
 
     </div>
