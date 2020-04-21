@@ -46,18 +46,29 @@
         width: 100vh;
         height: 5rem;
     }
+    .lateral-nav-link .nav-img{
+        width: 5rem;
+       
+    }
+
     .lateral-navbar-nav{
         flex-direction: row;
+        
     }
     .lateral-nav-link{
         justify-content: center;
     }
     .lateral-navbar:hover .lateral-nav-text{
         display: inline;
+        font-family: 'Fira Code';
+        width: 4.7rem;
+        margin: 0.1 0;
+       
     }
     .lateral-navbar:hover .nav-img{
         display: none;/*hiden image*/
     }
+    
 }
 
 /* large screens */
