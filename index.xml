@@ -6,10 +6,19 @@
     <description>Recent content on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Thu, 05 Mar 2020 21:32:29 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2020 21:32:29 +0100</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Recommended Sites</title>
+      <link>/recommended/</link>
+      <pubDate>Sat, 25 Apr 2020 21:32:29 +0100</pubDate>
+      
+      <guid>/recommended/</guid>
+      <description> 🌐 r/sysadmin 🌐 r/homelab 🌐 una al día  </description>
+    </item>
     
     <item>
       <title>Este sitio</title>

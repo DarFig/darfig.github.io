@@ -44,6 +44,12 @@
         </div>
       </div>
       
+      <div class="column is-2 ">
+        {{ range first 1 (where .Site.RegularPages "Type" "recommended") }}
+          {{ partial "recommended.html" . }}
+        {{end}}
+
+      </div>
       
     </div>
 

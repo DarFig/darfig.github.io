@@ -7,4 +7,4 @@
 - [ ] añadir tags, y revisar cómo se ven las listas de tags
 - [ ] revisar otras taxonomies
 - [x] añadir pagination
-- [ ] añadir a la derecha una columna que puede contener cosas como un índice de tags, o un ToDo list, un calendario...
+- [ ] añadir a la derecha una columna que puede contener cosas como un índice de tags, o un ToDo list, un calendario...(por ahora una lista de recomendados)
