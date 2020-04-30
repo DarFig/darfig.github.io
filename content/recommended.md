@@ -9,5 +9,5 @@ type: "recommended"
 - [&#127760; r/sysadmin](https://www.reddit.com/r/sysadmin/)
 - [&#127760; r/homelab](https://www.reddit.com/r/homelab/)
 - [&#127760; una al día](https://unaaldia.hispasec.com/)
-
+- [&#127760; nixCraft](https://www.cyberciti.biz/)
 

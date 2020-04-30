@@ -12,12 +12,21 @@
     
     
     <item>
+      <title>Clonar Discos en Linux</title>
+      <link>/posts/clonardiscoslinux/</link>
+      <pubDate>Thu, 30 Apr 2020 11:00:33 +0200</pubDate>
+      
+      <guid>/posts/clonardiscoslinux/</guid>
+      <description>&lt;p&gt;Ya sea porque necesitas una copia o quieres sustituir una unidad de almacenamiento, en algún momento puedes necesitar clonar una unidad de almacenamiento en linux, tanto estructura como datos.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Recommended Sites</title>
       <link>/recommended/</link>
       <pubDate>Sat, 25 Apr 2020 21:32:29 +0100</pubDate>
       
       <guid>/recommended/</guid>
-      <description> 🌐 r/sysadmin 🌐 r/homelab 🌐 una al día  </description>
+      <description> 🌐 r/sysadmin 🌐 r/homelab 🌐 una al día 🌐 nixCraft  </description>
     </item>
     
     <item>

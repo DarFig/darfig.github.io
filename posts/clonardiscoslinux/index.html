@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class=" negro" lang="es-ES">
+    <meta charset="utf-8">
+    <meta name="viewport" content="witdth=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Press+Start+2P|Source+Code+Pro&display=swap" rel="stylesheet"> 
+   
+    <link rel="stylesheet" href="/css/bulma.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+
+<title>Clonar Discos en Linux - Blg0</title>
+<meta name="generator" content="Hugo 0.69.2" />
+<body class="grisOscuro"><nav class="lateral-navbar">
+
+  <ul class="lateral-navbar-nav bordeVerde">
+    <li class="start2p lateral-nav-item ">
+      <a href="/" class="lateral-nav-link textoVerde">
+        <img src="/img/disk.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Home</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/posts/" class="lateral-nav-link textoVerde">
+        <img src="/img/paper.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Posts</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/projects/" class="lateral-nav-link textoVerde">
+        <img src="/img/flami.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Projects</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/about/" class="lateral-nav-link textoVerde">
+        <img src="/img/gosht.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">About</span>  
+      </a>
+    </li>
+    
+  </ul>
+
+</nav>
+<nav class="container-fluid negro ">
+    
+    <div class=" ">
+        
+        <div class=" ">
+            <a class="" href="/">   
+                <figure class="centrar image is-128x128">
+                    <img class="bordeVerde is-rounded" src="https://avatars2.githubusercontent.com/u/13577926?s=460&amp;v=4" width="50" height="50"alt="Brand">
+                 
+                </figure>
+            </a>
+           
+        </div>
+        <div class=" ">
+          <a href=""  class="">  
+            <h1 class="textoCentrado textoVerde start2p title is-1 "> Blg0</h1>
+          </a>
+        </div>
+      
+    
+      </div>
+
+</nav>
+
+
+
+    
+    <div id="content">
+            
+        <h1></h1>
+
+<div  role="main" class="sourceCode section" >
+    <div class="columns">
+        <div class="column is-2">
+            
+        </div>
+
+        <div class="column is-8">
+            <div class="negro bordeVerde">
+                <div class="column textoCentrado">
+                    <h3 class="textoVerde start2p title is-4">Post</h3>
+                </div>
+            </div>
+            <div class="column"></div>
+            <div class="column card grisClaro bordeVerde">
+                <div class="start2p card-header">
+                    <div class="card-header-title is-centered">
+                    Clonar Discos en Linux
+                    </div>
+                </div>
+                <div class="card-content">
+                    
+                    <div class="">
+                        
+                        <div class="content formatoTexto">
+                        
+                        <p>Ya sea porque necesitas una copia o quieres sustituir una unidad de almacenamiento, en algún momento puedes necesitar clonar una unidad de almacenamiento en linux, tanto estructura como datos.</p>
+<h2 id="clonar-discos-con-dd">Clonar discos con dd</h2>
+<h3 id="cosas-a-considerar">Cosas a considerar</h3>
+<p>Mi método favorito es el comando <strong>dd</strong>, no requiere instalar más herramientas y permite tanto copiar unidades completas como particiones. Pero así mismo se debe manejar con mucho <strong>cuidado</strong>. Un error con este comando puede borrar totalmente tu unidad de almacenamiento. El error más común es no tener claro cual es la uniadad origen y cual la destino de la copia y ponerlas en sentido inverso.</p>
+<p>Otro buen aliado puede ser clonezilla, o heramientas similares, pero no es el tema en el que me voy a centrar.</p>
+<p>Un dato que suelen olvidar algunos es que <strong>dd</strong> trabaja con ficheros, es decir convierte y copia ficheros. Lo cual quiere decir que se puede leer del descriptor de un disco y almacenarlo en un simple fichero como imagen copia (por ejemplo copiasda.img). Así podemos crear backups completos en unidades de red e incluso automatizarlo sin recurrir a herramientas más complejas (aunque un buen sistema de copias de seguridad incluye muchas más opciones y herramientas cuya importancia no debemos ignorar).</p>
+<p>Lógicamente para copiar el disco el destino debe ser igual o mayor en capacidad que el origen. En caso de hacer una copia comleta también hay que tener en cuenta que se copiará todo, las particiones y los espacio vacios. Si queremos copiar trozos, que no coinciden con particiones, recomiendo leer en la documentación sobre las opciones <em>bs</em> y <em>count</em> para la copia por bloques.</p>
+<h3 id="obtener-información">Obtener información</h3>
+<p>Para asegurarnos de si el disco es origen o destino nos podemos valer de las típicas herramientas de consola. Principalmente <strong>lsblk</strong> y <strong>fdisk -l</strong> así sabremos las unidades de almacenamiento, las particiones y sus tamaños, así como otros datos que nos pueden ayudar a orientarnos.</p>
+<h3 id="clonando">Clonando</h3>
+<p>El comando <strong>dd</strong> tiene una sintaxis simple <strong>dd if=origen of=destino</strong> y requiere permisos así que utilizaremos sudo o root. Una opción que puede ser interesante tener en cuenta es <em>bs</em> que define los bytes que se utilizarán para leer y escribir cada vez. Es como definir un tamaño de bloque y cada operación de lectura/escritura será de 1 bloque. Esto quiere decir que bloques grandes disminuirán el tiempo de copia pero también disminuirán la precisión, lo que puede provocar errores o perdidas de datos. El tamaño por defecto es de 512 bytes.</p>
+<p>Así, si queremos copiar sda en sde nos quedaría:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/sda of<span style="color:#f92672">=</span>/dev/sde
+<span style="color:#75715e"># o</span>
+sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/sda of<span style="color:#f92672">=</span>/dev/sde bs<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>
+<span style="color:#75715e"># cuando termine se pude comprobar la copia</span>
+sudo fdisk -l /dev/sda /dev/sde
+
+</code></pre></div><h3 id="puede-ser-interesante">Puede ser interesante</h3>
+<p>Si copiamos con origen /dev/null, /dev/zero, o similar borraremos todo el contenido del destino. Pero puede ser útil.</p>
+<p>Por ejemplo si queremos crear un fichero de swap:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>/swapfile bs<span style="color:#f92672">=</span>4k count<span style="color:#f92672">=</span>2048M
+mkswap /swapfile
+swapon /swapfile
+
+</code></pre></div><p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+                        
+                        </div>
+                        <br>
+                    </div>
+                    
+                </div>
+                <div class=" card-footer is-right">
+                    <div class="card-header-title is-centered">
+                        April 30 - 2020
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        
+    <div class="alpie"></div>   
+    </body><footer  class="negro pie">
+    <div class="container">
+        <div>
+            <br>
+            <p align="center"  class="textoVerde LettCab text-muted">
+                © 2020 by darfig <a href="https://github.com/DarFig">https://github.com/DarFig</a>
+            </p>
+        </div>
+    </div>
+
+</footer>
+
+
+
+</html>
