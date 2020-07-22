@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/navbar.css" />
 
-<title>Desactivar el incio de entorno gráfico por defecto - Blg0</title>
+<title>mdmonitor - Blg0</title>
 <meta name="generator" content="Hugo 0.70.0" />
 <body class="grisOscuro"><nav class="lateral-navbar">
 
@@ -88,7 +88,7 @@
             <div class="column card grisClaro bordeVerde">
                 <div class="start2p card-header">
                     <div class="card-header-title is-centered">
-                    Desactivar el incio de entorno gráfico por defecto
+                    mdmonitor
                     </div>
                 </div>
                 <div class="card-content">
@@ -97,17 +97,31 @@
                         
                         <div class="content formatoTexto">
                         
-                        <p>En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.</p>
-<h2 id="iniciamos">Iniciamos</h2>
-<h3 id="modificando-opciones-de-arranque">Modificando opciones de arranque</h3>
-<p>Necesitaremos tener permisos ya sea como root, o con acceso a sudo. Entramos en la consola y modificaremos con nuestro editor favorito (vi, nano, etc) el fichero <strong>/etc/inittab</strong>. Una de las primeras lineas es <strong>id:2:initdefault:</strong>, o algo similar y lo sustituimos por  <strong>id:3:initdefault:</strong>, básicamente es cambiar el 2 por el 3. XD</p>
-<p>Ahora modifiquemos el gestor de sesión. Cambiamos de directorio a <strong>/etc/rc3.d</strong>. Si ejecutamos un <strong>ls -l</strong> o  <strong>ls -al</strong> , veremos dependiendo de si tenemos GNOME, XFCE, u otros uno de los siguientes archivos: <strong>S19gdm3</strong>, <strong>S04lightdm</strong> o similares, y debemos sustituir la <strong>S</strong> por una <strong>k</strong>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  mv S19gdm3 K19gdm3 <span style="color:#75715e">#según sea el caso</span>
-  mv S04lightdm  K04lightdm
+                        <p>Un error común entre novatos al utilizar <strong>md</strong> para sus raids software es configurar incorrectamente o no configurar el <em>daemon</em> de <em>md</em>, también llamado <em>mdmonitor</em>.</p>
+<h3 id="mdmonitor">mdmonitor</h3>
+<p>El modo &ndash;monitor de <em>mdadm</em> corre de manera continua con el objetivo de detectar problemas en nuestro RAID y alertarnos. Su comportamiento será según tengamos configurado nuestro <strong>mdadm.conf</strong>. Este fichero no es requerido para el funcionamiento de <em>mdadm</em>. Pero si lo es si queremos guardar la configuración de nuestro RAID, y que se automonte en el arranque. Veamos la configuración básica que necesitamos.</p>
+<h4 id="mdadmconf">mdadm.conf</h4>
+<p>Este fichero se puede almacenar en <em>/etc/mdadm/mdadm.conf</em> o en <em>/etc/mdadm.conf</em>. No se genera de manera automática, así que tendremos que añadir ahí nuestras configuraciones cuando generemos nuestro raid.</p>
+<p>Para guardar la confuiguración de nuestros raids basta con añadir a nuestro fichero la salida del comando:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mdadm --detail --scan 
+</code></pre></div><p><strong>Con esto no basta</strong></p>
+<p>Hasta ahora hemos dicho que hay que monitorizar, pero no como nos alertan.</p>
+<p>La configuración válida más sencilla requiere configurar las alertas por correo. Basta con añadir al inicio del <em>mdadm.conf</em>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">MAILADDR ejemplo@ejemplo.com
+</code></pre></div><p>También es válida una cuenta local, por ejemplo podemos enviar los avisos al root y se generará un fichero en su cuenta con las alertas.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">MAILADDR root
+</code></pre></div><p>Entonces tendríamos un fichero básico de configuración que podrñia verse así por ejemplo:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># instruct the monitoring daemon where to send mail alerts</span> 
+MAILADDR root
 
-</code></pre></div><p>Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno gráfico en cualquier momento utilizando el comando <strong>startx</strong>, o ejecuntando nuestro gestor por ejemplo <strong>/etc/init.d/gdm3 start</strong>.</p>
-<p>Saludos
-<a href="https://github.com/DarFig">DarFig</a></p>
+<span style="color:#75715e"># definitions of existing MD arrays</span>
+ARRAY /dev/md/raid1 metadata1.2 name<span style="color:#f92672">=</span>host1:raid1 UUID<span style="color:#f92672">=</span>b7de2fc:60b303ac:3c176049:dc5b6c8b
+</code></pre></div><h3 id="arrancando-el-demonio">Arrancando el demonio</h3>
+<p>Ahora sí podríamos habilitar nuesto <em>mdmonitor</em> y activarlo para que empiece a trabajar.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># por ejemplo en centos</span>
+systemctl enable mdmonitor.service
+systemctl start mdmonitor.service
+</code></pre></div><p><em>Como es obvio hay más opciones disponibles, podemos consultarlas en la documentación. Algunas muy interesantes. Pero esto es lo mínimo necesario para que nuestro mdmonitor funcione.</em></p>
                         
                         </div>
                         <br>
@@ -116,7 +130,7 @@
                 </div>
                 <div class=" card-footer is-right">
                     <div class="card-header-title is-centered">
-                        April 28 - 2017
+                        July 22 - 2020
                     </div>
                 </div>
             </div>
