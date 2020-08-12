@@ -6,10 +6,19 @@
     <description>Recent content on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Sat, 25 Apr 2020 21:32:29 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2020 22:09:36 +0200</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Raid en auto-read-only</title>
+      <link>/posts/raidautoreadonly/</link>
+      <pubDate>Wed, 12 Aug 2020 22:09:36 +0200</pubDate>
+      
+      <guid>/posts/raidautoreadonly/</guid>
+      <description>&lt;p&gt;Si manejamos raid software en linux alguna vez nos podemos encontrar con que se nos ha puesto en modo solo lectura.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>mdmonitor</title>

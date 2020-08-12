@@ -62,3 +62,6 @@ systemctl start mdmonitor.service
 ```
 
 *Como es obvio hay más opciones disponibles, podemos consultarlas en la documentación. Algunas muy interesantes. Pero esto es lo mínimo necesario para que nuestro mdmonitor funcione.*
+
+Saludos
+[DarFig](https://github.com/DarFig)

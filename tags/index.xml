@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Wed, 22 Jul 2020 20:19:24 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2020 22:09:36 +0200</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>mdadm, linux, raid</title>
+      <link>/tags/mdadm-linux-raid/</link>
+      <pubDate>Wed, 12 Aug 2020 22:09:36 +0200</pubDate>
+      
+      <guid>/tags/mdadm-linux-raid/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>demond, linux, raid</title>
