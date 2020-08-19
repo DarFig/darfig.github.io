@@ -43,6 +43,11 @@
   </url>
   
   <url>
+    <loc>/tags/discos-linux-dd/</loc>
+    <lastmod>2020-04-30T11:00:33+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/recommended/</loc>
     <lastmod>2020-04-25T21:32:29+01:00</lastmod>
   </url>
@@ -58,6 +63,11 @@
   </url>
   
   <url>
+    <loc>/tags/proyectos-gohugo-web/</loc>
+    <lastmod>2020-04-21T13:23:06+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
     <lastmod>2020-03-05T21:32:29+01:00</lastmod>
   </url>
@@ -68,8 +78,23 @@
   </url>
   
   <url>
+    <loc>/tags/linux/</loc>
+    <lastmod>2017-04-28T22:12:57+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/github-seguridad/</loc>
+    <lastmod>2017-04-23T22:12:01+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/github_con_autenticacion_ssh/</loc>
     <lastmod>2017-04-23T22:12:01+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bbdd-linux-mysql/</loc>
+    <lastmod>2017-03-13T22:08:06+01:00</lastmod>
   </url>
   
   <url>

@@ -3,6 +3,7 @@ title: "Este sitio"
 date: 2020-04-21T13:23:06+02:00
 draft: false
 image: "gopher-side_color.svg"
+tags: "proyectos, gohugo, web"
 ---
 
 ## El proyecto
@@ -13,7 +14,7 @@ Este sitio es más que nada un pequeño proyecto para incluir a su vez otro. Me 
 
 ### GoHugo
 
-GoHugo es un framework para denerar sitios webs estáticos de forma rápida. Me llamó la atención por estar hecho en Golang y por ser relativamente reciente (al momento de escribir esto la versión v0.69.0). 
+GoHugo es un framework para generar sitios webs estáticos de forma rápida. Me llamó la atención por estar hecho en Golang y por ser relativamente reciente (al momento de escribir esto la versión v0.69.0). 
 
 La curiosidad me instó aprobarlo y modificar algunas cosas y así fue como me vi haciendo una platilla desde cero. Para probar la plantilla necesitaba contenido así que aquí me encuentro, añadiendo y probando &#128517;.
 

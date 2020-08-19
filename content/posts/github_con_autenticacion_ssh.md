@@ -2,6 +2,7 @@
 title: "Trabaja en github con autenticación por ssh"
 date: 2017-04-23T22:12:01+01:00
 draft: false
+tags: "github, seguridad"
 ---
 
 Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.

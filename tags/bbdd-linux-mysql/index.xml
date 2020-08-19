@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bbdd, linux, mysql on Blg0</title>
+    <link>/tags/bbdd-linux-mysql/</link>
+    <description>Recent content in bbdd, linux, mysql on Blg0</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-ES</language>
+    <lastBuildDate>Mon, 13 Mar 2017 22:08:06 +0100</lastBuildDate>
+    
+	<atom:link href="/tags/bbdd-linux-mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mysql desde tu shell</title>
+      <link>/posts/mysql_dese_tu_shell/</link>
+      <pubDate>Mon, 13 Mar 2017 22:08:06 +0100</pubDate>
+      
+      <guid>/posts/mysql_dese_tu_shell/</guid>
+      <description>&lt;h2 id=&#34;de-que-va-esto&#34;&gt;De que va esto&lt;/h2&gt;
+&lt;p&gt;Levantar un servidor &lt;strong&gt;MySQL&lt;/strong&gt; para tus proyectos es tan sencillo como tener cualquier distribución GNU/linux o similares y asegurarte de seguir algunos pasos sencillos.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

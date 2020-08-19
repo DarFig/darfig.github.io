@@ -2,6 +2,7 @@
 title: "Clonar Discos en Linux"
 date: 2020-04-30T11:00:33+02:00
 draft: false
+tags: "discos, linux, dd"
 ---
 
 Ya sea porque necesitas una copia o quieres sustituir una unidad de almacenamiento, en algún momento puedes necesitar clonar una unidad de almacenamiento en linux, tanto estructura como datos.

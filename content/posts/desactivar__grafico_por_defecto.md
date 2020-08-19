@@ -2,6 +2,7 @@
 title: "Desactivar el incio de entorno gráfico por defecto"
 date: 2017-04-28T22:12:57+01:00
 draft: false
+tags: "linux"
 ---
 
 En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.

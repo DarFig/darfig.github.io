@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>github, seguridad on Blg0</title>
+    <link>/tags/github-seguridad/</link>
+    <description>Recent content in github, seguridad on Blg0</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-ES</language>
+    <lastBuildDate>Sun, 23 Apr 2017 22:12:01 +0100</lastBuildDate>
+    
+	<atom:link href="/tags/github-seguridad/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Trabaja en github con autenticación por ssh</title>
+      <link>/posts/github_con_autenticacion_ssh/</link>
+      <pubDate>Sun, 23 Apr 2017 22:12:01 +0100</pubDate>
+      
+      <guid>/posts/github_con_autenticacion_ssh/</guid>
+      <description>&lt;p&gt;Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.&lt;/p&gt;
+&lt;h2 id=&#34;proceso&#34;&gt;Proceso&lt;/h2&gt;
+&lt;h3 id=&#34;creando-una-clave-ssh&#34;&gt;Creando una clave ssh&lt;/h3&gt;
+&lt;p&gt;Si no se ha generado anteriormente el primer paso es generar nuestras claves privada y pública, que se almacenarán en el directorio oculto: &lt;strong&gt;~/.ssh&lt;/strong&gt;. Podemos generar nuestras claves mediante:&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

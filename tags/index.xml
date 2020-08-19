@@ -29,5 +29,50 @@
       <description></description>
     </item>
     
+    <item>
+      <title>discos, linux, dd</title>
+      <link>/tags/discos-linux-dd/</link>
+      <pubDate>Thu, 30 Apr 2020 11:00:33 +0200</pubDate>
+      
+      <guid>/tags/discos-linux-dd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>proyectos, gohugo, web</title>
+      <link>/tags/proyectos-gohugo-web/</link>
+      <pubDate>Tue, 21 Apr 2020 13:23:06 +0200</pubDate>
+      
+      <guid>/tags/proyectos-gohugo-web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Fri, 28 Apr 2017 22:12:57 +0100</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github, seguridad</title>
+      <link>/tags/github-seguridad/</link>
+      <pubDate>Sun, 23 Apr 2017 22:12:01 +0100</pubDate>
+      
+      <guid>/tags/github-seguridad/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bbdd, linux, mysql</title>
+      <link>/tags/bbdd-linux-mysql/</link>
+      <pubDate>Mon, 13 Mar 2017 22:08:06 +0100</pubDate>
+      
+      <guid>/tags/bbdd-linux-mysql/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

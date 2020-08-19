@@ -2,6 +2,7 @@
 title: "Mysql desde tu shell"
 date: 2017-03-13T22:08:06+01:00
 draft: false
+tags: "bbdd, linux, mysql"
 ---
 
 ## De que va esto

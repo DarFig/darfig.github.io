@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>proyectos, gohugo, web on Blg0</title>
+    <link>/tags/proyectos-gohugo-web/</link>
+    <description>Recent content in proyectos, gohugo, web on Blg0</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-ES</language>
+    <lastBuildDate>Tue, 21 Apr 2020 13:23:06 +0200</lastBuildDate>
+    
+	<atom:link href="/tags/proyectos-gohugo-web/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Este sitio</title>
+      <link>/projects/this-site/</link>
+      <pubDate>Tue, 21 Apr 2020 13:23:06 +0200</pubDate>
+      
+      <guid>/projects/this-site/</guid>
+      <description>&lt;h2 id=&#34;el-proyecto&#34;&gt;El proyecto&lt;/h2&gt;
+&lt;p&gt;Este sitio es más que nada un pequeño proyecto para incluir a su vez otro. Me refiero a la creación de un tema personalizado de &lt;a href=&#34;https://gohugo.io&#34;&gt;&lt;strong&gt;gohugo&lt;/strong&gt;&lt;/a&gt;, para utilizarlo personalmente.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
