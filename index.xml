@@ -6,10 +6,20 @@
     <description>Recent content on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Wed, 12 Aug 2020 22:09:36 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2020 22:04:39 +0200</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CLIs para tarjetas raids</title>
+      <link>/posts/raidscli/</link>
+      <pubDate>Sun, 13 Sep 2020 22:04:39 +0200</pubDate>
+      
+      <guid>/posts/raidscli/</guid>
+      <description>&lt;p&gt;En el mercado hay varias marcas de controladoras para raid hardware, pero en general suelen funcionar de manera similar a la hora de configurar o sustituir los discos.&lt;/p&gt;
+&lt;p&gt;Normalmente te permiten un acceso en el arranqe del servidor para configurar. Pero una vez está todo funcionando no queremos recurrir a este método para sustituir un disco, porque nos obliga a parar todos los servicios. Entonces nos suelen quedar dos opciones una apliación con acceso web, o la vieja y fiable línea de comandos, normalmente con algún programa del fabricante.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Raid en auto-read-only</title>

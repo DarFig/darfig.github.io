@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class=" negro" lang="es-ES">
+    <meta charset="utf-8">
+    <meta name="viewport" content="witdth=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Press+Start+2P|Source+Code+Pro&display=swap" rel="stylesheet"> 
+   
+    <link rel="stylesheet" href="/css/bulma.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+
+<title>Areca**CLI** - Blg0</title>
+<meta name="generator" content="Hugo 0.74.3" />
+<body class="grisOscuro"><nav class="lateral-navbar">
+
+  <ul class="lateral-navbar-nav bordeVerde">
+    <li class="start2p lateral-nav-item ">
+      <a href="/" class="lateral-nav-link textoVerde">
+        <img src="/img/disk.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Home</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/posts/" class="lateral-nav-link textoVerde">
+        <img src="/img/paper.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Posts</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/projects/" class="lateral-nav-link textoVerde">
+        <img src="/img/flami.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Projects</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/about/" class="lateral-nav-link textoVerde">
+        <img src="/img/gosht.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">About</span>  
+      </a>
+    </li>
+    
+  </ul>
+
+</nav>
+<nav class="container-fluid negro ">
+    
+    <div class=" ">
+        
+        <div class=" ">
+            <a class="" href="/">   
+                <figure class="centrar image is-128x128">
+                    <img class="bordeVerde is-rounded" src="https://avatars2.githubusercontent.com/u/13577926?s=460&amp;v=4" width="50" height="50"alt="Brand">
+                 
+                </figure>
+            </a>
+           
+        </div>
+        <div class=" ">
+          <a href=""  class="">  
+            <h1 class="textoCentrado textoVerde start2p title is-1 "> Blg0</h1>
+          </a>
+        </div>
+      
+    
+      </div>
+
+</nav>
+
+
+
+    
+    <div id="content">
+            
+        <h1></h1>
+
+<div  role="main" class="sourceCode section" >
+    <div class="columns">
+        <div class="column is-2">
+            
+        </div>
+
+        <div class="column is-8">
+            <div class="negro bordeVerde">
+                <div class="column textoCentrado">
+                    <h3 class="textoVerde start2p title is-4">Post</h3>
+                </div>
+            </div>
+            <div class="column"></div>
+            <div class="column card grisClaro bordeVerde">
+                <div class="start2p card-header">
+                    <div class="card-header-title is-centered">
+                    Areca**CLI**
+                    </div>
+                </div>
+                <div class="card-content">
+                    
+                    <div class="">
+                        
+                        <div class="content formatoTexto">
+                        
+                        <p>En el mercado hay varias marcas de controladoras para raid hardware, pero en general suelen funcionar de manera similar a la hora de configurar o sustituir los discos.</p>
+<p>Normalmente te permiten un acceso en el arranqe del servidor para configurar. Pero una vez está todo funcionando no queremos recurrir a este método para sustituir un disco, porque nos obliga a parar todos los servicios. Entonces nos suelen quedar dos opciones una apliación con acceso web, o la vieja y fiable línea de comandos, normalmente con algún programa del fabricante.</p>
+<h2 id="el-cli">El CLI</h2>
+<p>La interfaz web está muy bien y es muy cómoda según la tarea que tengamos que hacer. Pero realmente en muchos casos no necesitamos tanto. Por ejemplo, si tenemos discos en <em>pass-through</em>, para sustituir un disco no necesitamos realmente la web. Podemos recurrir al <strong>CLI</strong> y acabar con un par de comandos.</p>
+<p>La mayor parte de los fabricantes nos proporcionan su propio programa <strong>CLI</strong>, con todos los comandos necesarios para hacer el trabajo. Por ejemplo, si tenemos una tarjeta de Areca una ARC-1680, ARC-1120, etc, podemos ir a su página web y descargarnos el <strong>CLI</strong> de Areca. Este está disponible según nuestro modelo y sistema operativo. Esto funciona de la misma manera con otros fabricantes, si el software es cerrado, que es común, nos brindarán un binario.</p>
+<h3 id="funcionamiento">Funcionamiento</h3>
+<p>El software suele venir preparado para lanzarlo desde nuestra consola y dejarnos con un paquete de herramientas completo. Lo más usual es que <strong>help</strong> sea lo primero que usemos. Y aunque muchas veces el fabricante nos deja algún manual con documentación. Este comando muchas veces sea más útil que 80 páginas sobre las distintas opciones que, salvo casos específicos, no necesitaremos.</p>
+<p>Otros comandos comunes suelen estar relacionados con ver información de discos, volúmenes o de los raids presentes, cosas del tipo <strong>disk info, vol info, raid info</strong>. De manera similar <strong>disk create, etc</strong> para crear o <strong>disk del</strong> o <strong>disk delete</strong> para borrar.</p>
+<p>A estos comandos hay que pasarles la información del dispositivo que queremos utilizar. Este identificador lo obtendremos usando el comando de información.</p>
+<p>Un punto importante a tener en cuenta es que las tarjetas raids suelen tener contraseña, o por defecto del fabricante o uno que pongamos en la primera configuración. Normalmente una aplicación web nos pedirá un usuario y contraseña para conectarnos. Pero en <strong>CLI</strong> puede que sólo se nos solicite para realizar acciones restringidas: crear, borrar, etc. Pero puede que no nos la solicite directamente, sino que de error. En este caso también tendremos un comando para poner la contraseña. En el caso de Areca por ejemplo será <strong>set password=la contraseña</strong>.</p>
+<h3 id="un-ejemplo-rápido">Un ejemplo rápido</h3>
+<p>Tenemos nuestra tarjeta y un disco en <em>pass-through</em> ha fallado. Ya lo cambiamos físicamente, pero el servidor sigue sin verlo. Pues nos descargamos el CLI y en unos pocos comandos está todo listo. Veamos, en este ejemplo usaré los comandos del CLI de areca:</p>
+<ul>
+<li>Lo primero es saber que discos tenemos sin usar <strong>disk info</strong> nos dejará ver una lista de los dispositivos y a donde están asignados. Como nuestro disco nuevo no está asignado será fácil de identificar.</li>
+<li>Normalmente sale una tabla de la que nos interesa el identificador de disco, en este caso es un número <strong>drv</strong> que utilizaremos a continuación.</li>
+<li>Si ahora intentamos crear algo nos devolverá un fallo, así que primero <strong>set password=menudacontraseña</strong></li>
+<li>ahora si creamos nuestro nuevo disco en <em>pass-through</em>, en el caso de areca sería <strong>disk create drv=x</strong> donde x es el identificador que vimos antes. De manera similar para crear un raid tendríamos <strong>raid create</strong> y una lista de drv, además de las opciones de tipo de raid, etc.</li>
+<li>podemos verificar nuevamente que todo esté en su sitio con <strong>disk info</strong>.</li>
+<li>si todo está bien salimos <strong>exit</strong> y nuestro nuevo disco debería verse en el sistema como uno más en <em>/dev</em></li>
+</ul>
+<h3 id="finalmente">Finalmente</h3>
+<p>Estas herramientas que nos proporcionan los fabricantes son bastante completas. Realmente no está de más consultar toda la documentación disponible antes de hacer nada. Simplemente para crear un raid tenemos varios argumentos, algunos obligatorios y otros opcionales que pueden ser muy interesantes conocer por adelantado. Estos muchas veces no se ven claramente con <em>help</em>, pero sí echandole un vistazo al manual. Esto nos ahorrará tiempo y errores.</p>
+<p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+                        
+                        </div>
+                        <br>
+                    </div>
+                    
+                </div>
+                <div class=" card-footer is-right">
+                    <div class="card-header-title is-centered">
+                        September 13 - 2020
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        
+    <div class="alpie"></div>   
+    </body><footer  class="negro pie">
+    <div class="container">
+        <div>
+            <br>
+            <p align="center"  class="textoVerde LettCab text-muted">
+                © 2020 by darfig <a href="https://github.com/DarFig">https://github.com/DarFig</a>
+            </p>
+        </div>
+    </div>
+
+</footer>
+
+
+
+</html>
