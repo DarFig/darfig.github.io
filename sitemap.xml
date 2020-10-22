@@ -58,7 +58,12 @@
   </url>
   
   <url>
-    <loc>/recommended/</loc>
+    <loc>/1recommendedbooks/</loc>
+    <lastmod>2020-04-25T21:32:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/0recommended/</loc>
     <lastmod>2020-04-25T21:32:29+01:00</lastmod>
   </url>
   

@@ -6,11 +6,7 @@
     <description>Recent content on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Sun, 13 Sep 2020 22:04:39 +0200</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 13 Sep 2020 22:04:39 +0200</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CLIs para tarjetas raids</title>
       <link>/posts/raidscli/</link>
@@ -49,11 +45,20 @@
     </item>
     
     <item>
-      <title>Recommended Sites</title>
-      <link>/recommended/</link>
+      <title>Recommended Books</title>
+      <link>/1recommendedbooks/</link>
       <pubDate>Sat, 25 Apr 2020 21:32:29 +0100</pubDate>
       
-      <guid>/recommended/</guid>
+      <guid>/1recommendedbooks/</guid>
+      <description> 🌐 Unix and Linux System Administration Handbook 🌐 Unix Programación Avanzada 🌐 Site Reliability Engineering  </description>
+    </item>
+    
+    <item>
+      <title>Recommended Sites</title>
+      <link>/0recommended/</link>
+      <pubDate>Sat, 25 Apr 2020 21:32:29 +0100</pubDate>
+      
+      <guid>/0recommended/</guid>
       <description> 🌐 r/sysadmin 🌐 r/homelab 🌐 una al día 🌐 nixCraft  </description>
     </item>
     

@@ -6,11 +6,7 @@
     <description>Recent content in raid, discos, linux,CLI on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Sun, 13 Sep 2020 22:04:39 +0200</lastBuildDate>
-    
-	<atom:link href="/tags/raid-discos-linuxcli/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 13 Sep 2020 22:04:39 +0200</lastBuildDate><atom:link href="/tags/raid-discos-linuxcli/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CLIs para tarjetas raids</title>
       <link>/posts/raidscli/</link>

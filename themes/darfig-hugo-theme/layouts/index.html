@@ -45,9 +45,9 @@
       </div>
       
       <div class="column is-2 ">
-        {{ range first 1 (where .Site.RegularPages "Type" "recommended") }}
+        {{ range  (where .Site.RegularPages "Type" "recommended") }}
           {{ partial "recommended.html" . }}
-        {{end}}
+        {{end}}     
 
       </div>
       

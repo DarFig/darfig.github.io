@@ -6,11 +6,7 @@
     <description>Recent content in discos, linux, dd on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Thu, 30 Apr 2020 11:00:33 +0200</lastBuildDate>
-    
-	<atom:link href="/tags/discos-linux-dd/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 30 Apr 2020 11:00:33 +0200</lastBuildDate><atom:link href="/tags/discos-linux-dd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Clonar Discos en Linux</title>
       <link>/posts/clonardiscoslinux/</link>

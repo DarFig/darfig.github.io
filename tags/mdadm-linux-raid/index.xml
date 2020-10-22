@@ -6,11 +6,7 @@
     <description>Recent content in mdadm, linux, raid on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Wed, 12 Aug 2020 22:09:36 +0200</lastBuildDate>
-    
-	<atom:link href="/tags/mdadm-linux-raid/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 12 Aug 2020 22:09:36 +0200</lastBuildDate><atom:link href="/tags/mdadm-linux-raid/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raid en auto-read-only</title>
       <link>/posts/raidautoreadonly/</link>
