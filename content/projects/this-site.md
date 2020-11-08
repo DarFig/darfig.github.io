@@ -26,3 +26,6 @@ Desde hace unos años atrás utilizaba bootstrap para mis componentes CSS. Pero 
 
 Así fue como buscando alternativas di con bulma, que es "CSS puro". Es cierto que añades un fichero css enorme del que igual no utilizas ni la tercera parte, si te molesta, es texto solo borra lo que no uses &#128579;. Pero no añades nada más, una hoja de estilos y punto.
 
+
+Saludos
+[DarFig](https://github.com/DarFig)

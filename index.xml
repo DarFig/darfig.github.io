@@ -6,7 +6,16 @@
     <description>Recent content on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Sun, 13 Sep 2020 22:04:39 +0200</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Oct 2020 17:14:01 +0200</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Customize</title>
+      <link>/posts/sitiospersonalizacion/</link>
+      <pubDate>Sat, 24 Oct 2020 17:14:01 +0200</pubDate>
+      
+      <guid>/posts/sitiospersonalizacion/</guid>
+      <description>&lt;p&gt;En general cuando tengo tiempo libre me gusta probar a tocar opciones y personalizar algunos parámetros. Esta semana estaba mirando por reddit y he descubierto un par de sitios que pueden ser de utilidad para esto.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>CLIs para tarjetas raids</title>
       <link>/posts/raidscli/</link>
