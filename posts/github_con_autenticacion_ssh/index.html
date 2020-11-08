@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Trabaja en github con autenticación por ssh - Blg0</title>
-<meta name="generator" content="Hugo 0.76.5" />
+<meta name="generator" content="Hugo 0.78.1" />
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -97,7 +97,7 @@
                         
                         <div class="content formatoTexto">
                         
-                        <p>Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.</p>
+                        <p>Primero hay que asegurarse de tener ssh (por ejemplo opnessh) instalado.</p>
 <h2 id="proceso">Proceso</h2>
 <h3 id="creando-una-clave-ssh">Creando una clave ssh</h3>
 <p>Si no se ha generado anteriormente el primer paso es generar nuestras claves privada y pública, que se almacenarán en el directorio oculto: <strong>~/.ssh</strong>. Podemos generar nuestras claves mediante:</p>
@@ -113,7 +113,7 @@
   ssh-add ~/.ssh/id_rsa <span style="color:#75715e">#agregamos la clave privada al agente</span>
                         <span style="color:#75715e">#nos pedirá la contraseña con la que lo ciframos</span>
 </code></pre></div><h3 id="trabajando-con-ssh">Trabajando con ssh</h3>
-<p>La proxima vez que clones un repositorio a local utiliza su dirección ssh, que a diferencia de la https utiliza un formato <strong><a href="mailto:git@github.com">git@github.com</a>:user/repositorio.git</strong>. El resto del funcionamiento es identico, salvo que no tienes que recurrir a la autenticación por contraseña. Si quieres cambiar la dirección de un repositorio en local entre https o ssh siempre puede recurir a:</p>
+<p>La próxima vez que clones un repositorio a local utiliza su dirección ssh, que a diferencia de la https utiliza un formato <strong><a href="mailto:git@github.com">git@github.com</a>:user/repositorio.git</strong>. El resto del funcionamiento es identico, salvo que no tienes que recurrir a la autenticación por contraseña. Si quieres cambiar la dirección de un repositorio en local entre https o ssh siempre puede recurir a:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git
     <span style="color:#75715e">#o</span>
     git remote set-url origin https://github.com/USERNAME/REPOSITORY.git

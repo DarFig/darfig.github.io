@@ -7,7 +7,7 @@ tags: "raid, discos, linux,CLI"
 
 En el mercado hay varias marcas de controladoras para raid hardware, pero en general suelen funcionar de manera similar a la hora de configurar o sustituir los discos.
 
-Normalmente te permiten un acceso en el arranqe del servidor para configurar. Pero una vez está todo funcionando no queremos recurrir a este método para sustituir un disco, porque nos obliga a parar todos los servicios. Entonces nos suelen quedar dos opciones una apliación con acceso web, o la vieja y fiable línea de comandos, normalmente con algún programa del fabricante.
+Normalmente te permiten un acceso en el arranque del servidor para configurar. Pero una vez está todo funcionando no queremos recurrir a este método para sustituir un disco, porque nos obliga a parar todos los servicios. Entonces nos suelen quedar dos opciones una aplicación con acceso web, o la vieja y fiable línea de comandos, normalmente con algún programa del fabricante.
 
 <!--more-->
 
@@ -41,7 +41,7 @@ Tenemos nuestra tarjeta y un disco en *pass-through* ha fallado. Ya lo cambiamos
 
 ### Finalmente
 
-Estas herramientas que nos proporcionan los fabricantes son bastante completas. Realmente no está de más consultar toda la documentación disponible antes de hacer nada. Simplemente para crear un raid tenemos varios argumentos, algunos obligatorios y otros opcionales que pueden ser muy interesantes conocer por adelantado. Estos muchas veces no se ven claramente con *help*, pero sí echandole un vistazo al manual. Esto nos ahorrará tiempo y errores.
+Estas herramientas que nos proporcionan los fabricantes son bastante completas. Realmente no está de más consultar toda la documentación disponible antes de hacer nada. Simplemente para crear un raid tenemos varios argumentos, algunos obligatorios y otros opcionales que pueden ser muy interesantes conocer por adelantado. Estos muchas veces no se ven claramente con *help*, pero sí echándole un vistazo al manual. Esto nos ahorrará tiempo y errores.
 
 
 Saludos

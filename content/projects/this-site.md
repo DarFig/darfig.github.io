@@ -22,7 +22,7 @@ La curiosidad me instó aprobarlo y modificar algunas cosas y así fue como me v
 
 Tengo que hablar también  de [**bulma**](https://bulma.io/), un framework abierto de css que uso desde hace muy poco. 
 
-Desde hace unos años atrás utilizaba bootstrap para mis componentes CSS. Pero a medida que el timepo fue pasando me di cuenta que era muchas veces demasiado para hacer cosas simples. Además verme obligado a añadir jquery a una web cuando luego no lo iba a utilizar en otra cosa me molestaba cada vez más. 
+Desde hace unos años atrás utilizaba bootstrap para mis componentes CSS. Pero a medida que el tiempo fue pasando me di cuenta que era muchas veces demasiado para hacer cosas simples. Además verme obligado a añadir jquery a una web cuando luego no lo iba a utilizar en otra cosa me molestaba cada vez más. 
 
 Así fue como buscando alternativas di con bulma, que es "CSS puro". Es cierto que añades un fichero css enorme del que igual no utilizas ni la tercera parte, si te molesta, es texto solo borra lo que no uses &#128579;. Pero no añades nada más, una hoja de estilos y punto.
 

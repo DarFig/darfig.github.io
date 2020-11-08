@@ -5,7 +5,7 @@ draft: false
 tags: "linux"
 ---
 
-En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.
+En entorno de servidor, o donde queramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.
 
 <!--more-->
 
@@ -23,7 +23,7 @@ Ahora modifiquemos el gestor de sesión. Cambiamos de directorio a **/etc/rc3.d*
 
 ```
 
-Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno gráfico en cualquier momento utilizando el comando **startx**, o ejecuntando nuestro gestor por ejemplo **/etc/init.d/gdm3 start**.
+Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno gráfico en cualquier momento utilizando el comando **startx**, o ejecutando nuestro gestor por ejemplo **/etc/init.d/gdm3 start**.
 
 
 

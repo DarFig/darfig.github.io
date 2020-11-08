@@ -14,7 +14,7 @@
       
       <guid>/posts/raidscli/</guid>
       <description>&lt;p&gt;En el mercado hay varias marcas de controladoras para raid hardware, pero en general suelen funcionar de manera similar a la hora de configurar o sustituir los discos.&lt;/p&gt;
-&lt;p&gt;Normalmente te permiten un acceso en el arranqe del servidor para configurar. Pero una vez está todo funcionando no queremos recurrir a este método para sustituir un disco, porque nos obliga a parar todos los servicios. Entonces nos suelen quedar dos opciones una apliación con acceso web, o la vieja y fiable línea de comandos, normalmente con algún programa del fabricante.&lt;/p&gt;</description>
+&lt;p&gt;Normalmente te permiten un acceso en el arranque del servidor para configurar. Pero una vez está todo funcionando no queremos recurrir a este método para sustituir un disco, porque nos obliga a parar todos los servicios. Entonces nos suelen quedar dos opciones una aplicación con acceso web, o la vieja y fiable línea de comandos, normalmente con algún programa del fabricante.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -50,7 +50,7 @@
       <pubDate>Fri, 28 Apr 2017 22:12:57 +0100</pubDate>
       
       <guid>/posts/desactivar__grafico_por_defecto/</guid>
-      <description>&lt;p&gt;En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.&lt;/p&gt;</description>
+      <description>&lt;p&gt;En entorno de servidor, o donde queramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -59,7 +59,7 @@
       <pubDate>Sun, 23 Apr 2017 22:12:01 +0100</pubDate>
       
       <guid>/posts/github_con_autenticacion_ssh/</guid>
-      <description>&lt;p&gt;Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.&lt;/p&gt;
+      <description>&lt;p&gt;Primero hay que asegurarse de tener ssh (por ejemplo opnessh) instalado.&lt;/p&gt;
 &lt;h2 id=&#34;proceso&#34;&gt;Proceso&lt;/h2&gt;
 &lt;h3 id=&#34;creando-una-clave-ssh&#34;&gt;Creando una clave ssh&lt;/h3&gt;
 &lt;p&gt;Si no se ha generado anteriormente el primer paso es generar nuestras claves privada y pública, que se almacenarán en el directorio oculto: &lt;strong&gt;~/.ssh&lt;/strong&gt;. Podemos generar nuestras claves mediante:&lt;/p&gt;</description>

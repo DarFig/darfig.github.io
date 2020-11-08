@@ -14,7 +14,7 @@ Levantar un servidor **MySQL** para tus proyectos es tan sencillo como tener cua
 ## Primero lo primero
 ##### **Instalando**
 
-Segun tu sistema(y si no lo tienes instalado) tendrás que utilizar:
+Según tu sistema(y si no lo tienes instalado) tendrás que utilizar:
 
 ```shell
   apt-get -y install mysql-server #instalar

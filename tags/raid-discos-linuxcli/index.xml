@@ -14,7 +14,7 @@
       
       <guid>/posts/raidscli/</guid>
       <description>&lt;p&gt;En el mercado hay varias marcas de controladoras para raid hardware, pero en general suelen funcionar de manera similar a la hora de configurar o sustituir los discos.&lt;/p&gt;
-&lt;p&gt;Normalmente te permiten un acceso en el arranqe del servidor para configurar. Pero una vez está todo funcionando no queremos recurrir a este método para sustituir un disco, porque nos obliga a parar todos los servicios. Entonces nos suelen quedar dos opciones una apliación con acceso web, o la vieja y fiable línea de comandos, normalmente con algún programa del fabricante.&lt;/p&gt;</description>
+&lt;p&gt;Normalmente te permiten un acceso en el arranque del servidor para configurar. Pero una vez está todo funcionando no queremos recurrir a este método para sustituir un disco, porque nos obliga a parar todos los servicios. Entonces nos suelen quedar dos opciones una aplicación con acceso web, o la vieja y fiable línea de comandos, normalmente con algún programa del fabricante.&lt;/p&gt;</description>
     </item>
     
   </channel>

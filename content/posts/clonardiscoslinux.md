@@ -15,11 +15,11 @@ Ya sea porque necesitas una copia o quieres sustituir una unidad de almacenamien
 
 Mi método favorito es el comando **dd**, no requiere instalar más herramientas y permite tanto copiar unidades completas como particiones. Pero así mismo se debe manejar con mucho **cuidado**. Un error con este comando puede borrar totalmente tu unidad de almacenamiento. El error más común es no tener claro cual es la uniadad origen y cual la destino de la copia y ponerlas en sentido inverso.
 
-Otro buen aliado puede ser clonezilla, o heramientas similares, pero no es el tema en el que me voy a centrar.
+Otro buen aliado puede ser clonezilla, o herramientas similares, pero no es el tema en el que me voy a centrar.
 
 Un dato que suelen olvidar algunos es que **dd** trabaja con ficheros, es decir convierte y copia ficheros. Lo cual quiere decir que se puede leer del descriptor de un disco y almacenarlo en un simple fichero como imagen copia (por ejemplo copiasda.img). Así podemos crear backups completos en unidades de red e incluso automatizarlo sin recurrir a herramientas más complejas (aunque un buen sistema de copias de seguridad incluye muchas más opciones y herramientas cuya importancia no debemos ignorar).
 
-Lógicamente para copiar el disco el destino debe ser igual o mayor en capacidad que el origen. En caso de hacer una copia comleta también hay que tener en cuenta que se copiará todo, las particiones y los espacio vacios. Si queremos copiar trozos, que no coinciden con particiones, recomiendo leer en la documentación sobre las opciones *bs* y *count* para la copia por bloques.
+Lógicamente para copiar el disco el destino debe ser igual o mayor en capacidad que el origen. En caso de hacer una copia completa también hay que tener en cuenta que se copiará todo, las particiones y los espacio vacíos. Si queremos copiar trozos, que no coinciden con particiones, recomiendo leer en la documentación sobre las opciones *bs* y *count* para la copia por bloques.
 
 ### Obtener información
 

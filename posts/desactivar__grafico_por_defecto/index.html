@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Desactivar el incio de entorno gráfico por defecto - Blg0</title>
-<meta name="generator" content="Hugo 0.76.5" />
+<meta name="generator" content="Hugo 0.78.1" />
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -97,7 +97,7 @@
                         
                         <div class="content formatoTexto">
                         
-                        <p>En entorno de servidor, o donde querramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.</p>
+                        <p>En entorno de servidor, o donde queramos aprovechar el rendimiento en una aplicación específica, nos interesa asegurarnos que el arranque de nuestro sistema linux no sea en entorno gráfico por defecto. Pero en algunos casos podemos requerir de este entorno para momentos muy específicos. De esta manera llegué a la duda de como desactivar el entorno gráfico pero dejarlo instalado para cuando lo necesite.</p>
 <h2 id="iniciamos">Iniciamos</h2>
 <h3 id="modificando-opciones-de-arranque">Modificando opciones de arranque</h3>
 <p>Necesitaremos tener permisos ya sea como root, o con acceso a sudo. Entramos en la consola y modificaremos con nuestro editor favorito (vi, nano, etc) el fichero <strong>/etc/inittab</strong>. Una de las primeras lineas es <strong>id:2:initdefault:</strong>, o algo similar y lo sustituimos por  <strong>id:3:initdefault:</strong>, básicamente es cambiar el 2 por el 3. XD</p>
@@ -105,7 +105,7 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  mv S19gdm3 K19gdm3 <span style="color:#75715e">#según sea el caso</span>
   mv S04lightdm  K04lightdm
 
-</code></pre></div><p>Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno gráfico en cualquier momento utilizando el comando <strong>startx</strong>, o ejecuntando nuestro gestor por ejemplo <strong>/etc/init.d/gdm3 start</strong>.</p>
+</code></pre></div><p>Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno gráfico en cualquier momento utilizando el comando <strong>startx</strong>, o ejecutando nuestro gestor por ejemplo <strong>/etc/init.d/gdm3 start</strong>.</p>
 <p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         

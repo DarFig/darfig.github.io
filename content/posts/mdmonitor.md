@@ -11,13 +11,13 @@ Un error común entre novatos al utilizar **md** para sus raids software es conf
 
 ### mdmonitor
 
-El modo --monitor de *mdadm* corre de manera continua con el objetivo de detectar problemas en nuestro RAID y alertarnos. Su comportamiento será según tengamos configurado nuestro **mdadm.conf**. Este fichero no es requerido para el funcionamiento de *mdadm*. Pero si lo es si queremos guardar la configuración de nuestro RAID, y que se automonte en el arranque. Veamos la configuración básica que necesitamos.
+El modo --monitor de *mdadm* corre de manera continua con el objetivo de detectar problemas en nuestro RAID y alertarnos. Su comportamiento será según tengamos configurado nuestro **mdadm.conf**. Este fichero no es requerido para el funcionamiento de *mdadm*. Pero si lo es si queremos guardar la configuración de nuestro RAID, y que se auto-monte en el arranque. Veamos la configuración básica que necesitamos.
 
 #### mdadm.conf
 
 Este fichero se puede almacenar en */etc/mdadm/mdadm.conf* o en */etc/mdadm.conf*. No se genera de manera automática, así que tendremos que añadir ahí nuestras configuraciones cuando generemos nuestro raid.
 
-Para guardar la confuiguración de nuestros raids basta con añadir a nuestro fichero la salida del comando:
+Para guardar la configuración de nuestros raids basta con añadir a nuestro fichero la salida del comando:
 
 ```bash
 mdadm --detail --scan 
@@ -53,7 +53,7 @@ ARRAY /dev/md/raid1 metadata1.2 name=host1:raid1 UUID=b7de2fc:60b303ac:3c176049:
 
 ### Arrancando el demonio
 
-Ahora sí podríamos habilitar nuesto *mdmonitor* y activarlo para que empiece a trabajar.
+Ahora sí podríamos habilitar nuestro *mdmonitor* y activarlo para que empiece a trabajar.
 
 ```bash
 # por ejemplo en centos

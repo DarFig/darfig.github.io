@@ -13,7 +13,7 @@
       <pubDate>Sun, 23 Apr 2017 22:12:01 +0100</pubDate>
       
       <guid>/posts/github_con_autenticacion_ssh/</guid>
-      <description>&lt;p&gt;Primero hay que asegurarse de tener ssh(por ejemplo opnessh) instalado.&lt;/p&gt;
+      <description>&lt;p&gt;Primero hay que asegurarse de tener ssh (por ejemplo opnessh) instalado.&lt;/p&gt;
 &lt;h2 id=&#34;proceso&#34;&gt;Proceso&lt;/h2&gt;
 &lt;h3 id=&#34;creando-una-clave-ssh&#34;&gt;Creando una clave ssh&lt;/h3&gt;
 &lt;p&gt;Si no se ha generado anteriormente el primer paso es generar nuestras claves privada y pública, que se almacenarán en el directorio oculto: &lt;strong&gt;~/.ssh&lt;/strong&gt;. Podemos generar nuestras claves mediante:&lt;/p&gt;</description>
