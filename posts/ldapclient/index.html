@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/navbar.css" />
 
-<title>discos, linux, dd - Blg0</title>
+<title>Configuración rápida de ldap-client - Blg0</title>
 <meta name="generator" content="Hugo 0.78.1" />
 <body class="grisOscuro"><nav class="lateral-navbar">
 
@@ -72,61 +72,67 @@
             
         <h1></h1>
 
-<div role="main" class="sourceCode section">
-    <div class=" columns ">
+<div  role="main" class="sourceCode section" >
+    <div class="columns">
         <div class="column is-2">
             
         </div>
+
         <div class="column is-8">
             <div class="negro bordeVerde">
-                <div class=" column textoCentrado">
-                    <h3 class="textoVerde start2p title is-4">Entradas</h3>
+                <div class="column textoCentrado">
+                    <h3 class="textoVerde start2p title is-4">Post</h3>
                 </div>
             </div>
-    
-           
-            
-            <div class="column">
-                <div class="card grisClaro bordeVerde">
-                    <div class="start2p card-header">
-                        <p class="card-header-title is-centered">
-                        Mysql desde tu shell
-                        </p>
-                    </div>
-                    <div class="card-content">
-                    
-                    
-                    <p class="content formatoTexto"><h2 id="de-que-va-esto">De que va esto</h2>
-<p>Levantar un servidor <strong>MySQL</strong> para tus proyectos es tan sencillo como tener cualquier distribución GNU/linux o similares y asegurarte de seguir algunos pasos sencillos.</p></p>
-                    
-                    
-                    <a href="/posts/mysql_dese_tu_shell/">Continuar</a>
-                    </div>
-                    <div class="card-footer">
-                        March 13 - 2017
+            <div class="column"></div>
+            <div class="column card grisClaro bordeVerde">
+                <div class="start2p card-header">
+                    <div class="card-header-title is-centered">
+                    Configuración rápida de ldap-client
                     </div>
                 </div>
-            </div>
-            
+                <div class="card-content">
+                    
+                    <div class="">
+                        
+                        <div class="content formatoTexto">
+                        
+                        <h2 id="ldap">LDAP</h2>
+<p>LDAP (Lightweight Directory Access Protocol ) es todo un conjunto de protocolos ampliamente utilizado. En entornos linux concretamente <strong>OpenLDAP</strong> es la implementación más ampliamente usada. En este caso hablaremos de la configuración rápida de un cliente ldap para conectar un nuevo nodo a un servidor openldap.</p>
+<h2 id="ldap-client">LDAP client</h2>
+<p>La instalación de un cliente para ldap es muy sencilla mediante yum, apt, etc. El nombre de los paquetes puede cambiar según nuestra distribución. Por ejemplo en ubuntu server 18.04:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># instalación</span>
+sudo apt install ldap-auth-client nscd
+<span style="color:#75715e"># configuración</span>
+sudo auth-client-config -t nss -p lac_ldap
 
-            <div class="pagination negro start2p textoVerde bordeVerde"  role="navigation">
-                <div class="column is-4">
-                
-                    <a href="/tags/discos-linux-dd/" class="pagination-previous textoVerde bordeVerde">&#11013;</a>
-                
+</code></pre></div><p>Para configuraciones específicas y más avanzadas nos interesará mirar además otros ficheros (más relacionados con la configuración de <strong>pam</strong> ) como:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc/pam.d/common-session <span style="color:#75715e"># añadir: session required pam_mkhomedir.so skel=/etc/skel umask=077</span>
+/etc/pam.d/common-auth
+/usr/share/pam-configs/mkhomedir
+</code></pre></div><p>Finalmente no olvidemos reiniciar los servicios para aplicar los cambios correctamente:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># reconfigurar el pam</span>
+sudo pam-auth-update
+<span style="color:#75715e"># reiniciar nscd</span>
+sudo systemctl restart nscd <span style="color:#75715e"># o /etc/init.d/nscd restart</span>
+sudo systemctl enable nscd
+</code></pre></div><p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+                        
+                        </div>
+                        <br>
+                    </div>
+                    
                 </div>
-                <div class="column is-4">
-                <span class="pagination-ellipsis textoVerde">2</span>
+                <div class=" card-footer is-right">
+                    <div class="card-header-title is-centered">
+                        November 8 - 2020
+                    </div>
                 </div>
-                <div class="column is-4">
-                
             </div>
-            
         </div>
-
     </div>
 </div>
-
 
         </div>
         
