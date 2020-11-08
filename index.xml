@@ -6,7 +6,17 @@
     <description>Recent content on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Sun, 08 Nov 2020 17:38:48 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Nov 2020 20:37:34 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homelab Openstack</title>
+      <link>/projects/openstack/</link>
+      <pubDate>Sun, 08 Nov 2020 20:37:34 +0100</pubDate>
+      
+      <guid>/projects/openstack/</guid>
+      <description>&lt;h2 id=&#34;el-proyecto&#34;&gt;El proyecto&lt;/h2&gt;
+&lt;p&gt;Llevo un tiempo pensando en desplegar un openstack de manera completa, nada de &lt;a href=&#34;https://docs.openstack.org/devstack/latest/&#34;&gt;devstack&lt;/a&gt;, que es muy útil para conocer el sistema y hacer pruebas de gestión.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Configuración rápida de ldap-client</title>
       <link>/posts/ldapclient/</link>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class=" negro" lang="es-ES">
+    <meta charset="utf-8">
+    <meta name="viewport" content="witdth=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Press+Start+2P|Source+Code+Pro&display=swap" rel="stylesheet"> 
+   
+    <link rel="stylesheet" href="/css/bulma.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+
+<title>Homelab Openstack - Blg0</title>
+<meta name="generator" content="Hugo 0.78.1" />
+<body class="grisOscuro"><nav class="lateral-navbar">
+
+  <ul class="lateral-navbar-nav bordeVerde">
+    <li class="start2p lateral-nav-item ">
+      <a href="/" class="lateral-nav-link textoVerde">
+        <img src="/img/disk.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Home</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/posts/" class="lateral-nav-link textoVerde">
+        <img src="/img/paper.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Posts</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/projects/" class="lateral-nav-link textoVerde">
+        <img src="/img/flami.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Projects</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/about/" class="lateral-nav-link textoVerde">
+        <img src="/img/gosht.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">About</span>  
+      </a>
+    </li>
+    
+  </ul>
+
+</nav>
+<nav class="container-fluid negro ">
+    
+    <div class=" ">
+        
+        <div class=" ">
+            <a class="" href="/">   
+                <figure class="centrar image is-128x128">
+                    <img class="bordeVerde is-rounded" src="https://avatars2.githubusercontent.com/u/13577926?s=460&amp;v=4" width="50" height="50"alt="Brand">
+                 
+                </figure>
+            </a>
+           
+        </div>
+        <div class=" ">
+          <a href=""  class="">  
+            <h1 class="textoCentrado textoVerde start2p title is-1 "> Blg0</h1>
+          </a>
+        </div>
+      
+    
+      </div>
+
+</nav>
+
+
+
+    
+    <div id="content">
+            
+        <h1></h1>
+
+<div  role="main" class="sourceCode section" >
+    <div class="columns">
+        <div class="column is-2">
+            
+        </div>
+
+        <div class="column is-8">
+            <div class="negro bordeVerde">
+                <div class="column textoCentrado">
+                    <h3 class="textoVerde start2p title is-4">Project</h3>
+                </div>
+            </div>
+            <div class="column"></div>
+            <div class="column card grisClaro bordeVerde">
+                <div class="start2p card-header">
+                    <div class="card-header-title is-centered">
+                    Homelab Openstack
+                    </div>
+                </div>
+                <div class="card-content">
+                    
+                    <div class="">
+                        
+                        <div class="content formatoTexto">
+                            <h2 id="el-proyecto">El proyecto</h2>
+<p>Llevo un tiempo pensando en desplegar un openstack de manera completa, nada de <a href="https://docs.openstack.org/devstack/latest/">devstack</a>, que es muy útil para conocer el sistema y hacer pruebas de gestión.</p>
+<p>Todo montado desde cero en nodos &ldquo;reales&rdquo;, más como proyecto de arquitectura/diseño que para probar temas de gestión posterior. Aunque siempre es mejor probar la gestión en un entorno &ldquo;real&rdquo; por así decirlo.</p>
+<h2 id="iniciando">Iniciando</h2>
+<p>Como todo proyecto hay que empezar por documentarse. He estado consultando bastante información sobre arquitecturas, requisitos, y ejemplos. En general creo que para este tipo de proyectos no hace falta hacer inversiones en libros o similares. Asumiendo que ya se tiene una base de conocimientos asentada cuando se intenta montar algo así. Las principales fuentes están en la propia documentación de openstack. Aunque hay que resaltar que de primeras puede ser algo abrumador, si se lee con calma está todo ahí.</p>
+<p>Para empezar:</p>
+<ul>
+<li><a href="https://docs.openstack.org/install-guide/">https://docs.openstack.org/install-guide/</a></li>
+<li><a href="https://wiki.openstack.org/wiki/Main_Page">https://wiki.openstack.org/wiki/Main_Page</a></li>
+<li></li>
+</ul>
+<h2 id="dónde">Dónde</h2>
+<p>Hace tiempo que utilizo virtualización como base. Simplifica la replicación y manipulación de nodos, así como la gestión de snapshots y backups. He acumulado experiencia en el uso de <a href="https://xcp-ng.org/">xcp-ng</a>, una solución opensource orientada a para-virtualización basada en xenserver; así que lo he visto como mi solución por defecto. Pero en general cualquier otra solución parecida valdrá.</p>
+<h2 id="empezando">Empezando</h2>
+<p>Para empezar hay que prepara un sistema operativo base. He seleccionado CentOS 8.2 como mi punto de partida. Cuenta con soporte directo para instalar desde los repositorios, y es bastante estable como distribución a largo plazo. Tras instalar CentOS, openstack, y la configuración básica del nodo lo he convertido en una <em>template</em> que me valdrá para generar desde aquí nuevos nodos sin reinstalar cada vez el sistema.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># paquetes en centos 8.2</span>
+<span style="color:#75715e"># openstack ussuri</span>
+yum install centos-release-openstack-ussuri
+yum config-manager --set-enabled PowerTools
+yum upgrade
+yum install python3-openstackclient
+yum install openstack-selinux
+</code></pre></div><p>La arquitectura básica inicial debe tener como mínimo un nodo controlador y un nodo de cómputo. Nuevamente de cada uno de estos nodos he generado nuevas <em>templates</em>, con sus respectivas diferencias en configuración.</p>
+<p>Para empezar estos dos nodos tendrán 4 cores, hasta 16GB de ram y hasta 64GB de disco. Cada nodo requiere dos interfaces de red, una como red de gestión y otra como red <em>externa</em></p>
+<p><strong>continuará&hellip;</strong></p>
+<p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+                        </div>
+                        <br>
+                    </div>
+                    
+                </div>
+                <div class=" card-footer is-right">
+                    <div class="card-header-title is-centered">
+                        November 8 - 2020
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        
+    <div class="alpie"></div>   
+    </body><footer  class="negro pie">
+    <div class="container">
+        <div>
+            <br>
+            <p align="center"  class="textoVerde LettCab text-muted">
+                © 2020 by darfig <a href="https://github.com/DarFig">https://github.com/DarFig</a>
+            </p>
+        </div>
+    </div>
+
+</footer>
+
+
+
+</html>

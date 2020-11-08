@@ -4,7 +4,27 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-11-08T17:38:48+01:00</lastmod>
+    <lastmod>2020-11-08T20:37:34+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/projects/openstack/</loc>
+    <lastmod>2020-11-08T20:37:34+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/projects/</loc>
+    <lastmod>2020-11-08T20:37:34+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/proyectos-openstack-cloud-buidyourself/</loc>
+    <lastmod>2020-11-08T20:37:34+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-11-08T20:37:34+01:00</lastmod>
   </url>
   
   <url>
@@ -19,11 +39,6 @@
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2020-11-08T17:38:48+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-11-08T17:38:48+01:00</lastmod>
   </url>
   
@@ -69,11 +84,6 @@
   
   <url>
     <loc>/projects/this-site/</loc>
-    <lastmod>2020-04-21T13:23:06+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/projects/</loc>
     <lastmod>2020-04-21T13:23:06+02:00</lastmod>
   </url>
   
