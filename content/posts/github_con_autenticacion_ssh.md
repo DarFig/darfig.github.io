@@ -37,7 +37,7 @@ Para que nuestra autenticación funcione debemos agregar nuestra clave privada a
 
 ### Trabajando con ssh
 
-La próxima vez que clones un repositorio a local utiliza su dirección ssh, que a diferencia de la https utiliza un formato **git@github.com:user/repositorio.git**. El resto del funcionamiento es identico, salvo que no tienes que recurrir a la autenticación por contraseña. Si quieres cambiar la dirección de un repositorio en local entre https o ssh siempre puede recurir a:
+La próxima vez que clones un repositorio a local utiliza su dirección ssh, que a diferencia de la https utiliza un formato **git@github.com:user/repositorio.git**. El resto del funcionamiento es idéntico, salvo que no tienes que recurrir a la autenticación por contraseña. Si quieres cambiar la dirección de un repositorio en local entre https o ssh siempre puede recurrir a:
 
 ```shell
     git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git

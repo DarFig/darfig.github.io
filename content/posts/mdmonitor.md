@@ -39,7 +39,7 @@ También es válida una cuenta local, por ejemplo podemos enviar los avisos al r
 MAILADDR root
 ```
 
-Entonces tendríamos un fichero básico de configuración que podrñia verse así por ejemplo:
+Entonces tendríamos un fichero básico de configuración que podría verse así por ejemplo:
 
 
 ```bash

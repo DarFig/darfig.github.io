@@ -13,7 +13,7 @@ Ya sea porque necesitas una copia o quieres sustituir una unidad de almacenamien
 
 ### Cosas a considerar
 
-Mi método favorito es el comando **dd**, no requiere instalar más herramientas y permite tanto copiar unidades completas como particiones. Pero así mismo se debe manejar con mucho **cuidado**. Un error con este comando puede borrar totalmente tu unidad de almacenamiento. El error más común es no tener claro cual es la uniadad origen y cual la destino de la copia y ponerlas en sentido inverso.
+Mi método favorito es el comando **dd**, no requiere instalar más herramientas y permite tanto copiar unidades completas como particiones. Pero así mismo se debe manejar con mucho **cuidado**. Un error con este comando puede borrar totalmente tu unidad de almacenamiento. El error más común es no tener claro cual es la unidad origen y cual la destino de la copia y ponerlas en sentido inverso.
 
 Otro buen aliado puede ser clonezilla, o herramientas similares, pero no es el tema en el que me voy a centrar.
 
