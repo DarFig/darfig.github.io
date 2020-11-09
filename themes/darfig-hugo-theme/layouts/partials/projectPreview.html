@@ -1,7 +1,8 @@
 
-<div class="column">
+<div class="column tarjeta">
     
     <div class="card grisClaro bordeVerde" >
+      
         {{ if .Params.image   }}
         <div class="card-image">
             <img src="/{{ .Params.image | absURL }}" class="imgP card-img-top text-center" alt="img">
@@ -21,8 +22,11 @@
         <div class="card-footer">
             <small class="card-footer-itme centrar">{{ dateFormat "January 2 - 2006" .Date }}</small>
         </div>
+        
     </div>
     
+    
 </div>
+
 <!--  -->
           
