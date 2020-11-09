@@ -1,5 +1,5 @@
 ---
-title: "Desactivar el incio de entorno gráfico por defecto"
+title: "Desactivar el inicio de entorno gráfico por defecto"
 date: 2017-04-28T22:12:57+01:00
 draft: false
 tags: "linux"

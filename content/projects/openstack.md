@@ -22,7 +22,7 @@ Para empezar:
 
 - https://docs.openstack.org/install-guide/
 - https://wiki.openstack.org/wiki/Main_Page
-- 
+ 
 
 ## Dónde
 
