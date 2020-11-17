@@ -90,3 +90,9 @@ body::-webkit-scrollbar-thumb{
     text-align: justify;
     font-size: smaller;
 }
+
+.tarjeta{
+    display: flex;
+    
+    
+}

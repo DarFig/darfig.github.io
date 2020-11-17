@@ -1,7 +1,7 @@
 ---
 title: "CLIs para tarjetas raids"
 date: 2020-09-13T22:04:39+02:00
-draft: true
+draft: false
 tags: "raid, discos, linux,CLI"
 ---
 

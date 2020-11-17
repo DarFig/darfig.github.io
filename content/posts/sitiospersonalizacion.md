@@ -1,7 +1,7 @@
 ---
 title: "Customize"
 date: 2020-10-24T17:14:01+02:00
-draft: true
+draft: false
 tags: "webs, teminal, personalizar, customize"
 ---
 
