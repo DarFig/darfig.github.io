@@ -29,7 +29,7 @@ Para empezar:
 Hace tiempo que utilizo virtualización como base. Simplifica la replicación y manipulación de nodos, así como la gestión de snapshots y backups. He acumulado experiencia en el uso de [xcp-ng](https://xcp-ng.org/), una solución opensource orientada a para-virtualización basada en xenserver; así que lo he visto como mi solución por defecto. Pero en general cualquier otra solución parecida valdrá.
 
 
-## Empezando
+## Empezando (old)
 
 Para empezar hay que prepara un sistema operativo base. He seleccionado CentOS 8.2 como mi punto de partida. Cuenta con soporte directo para instalar desde los repositorios, y es bastante estable como distribución a largo plazo. Tras instalar CentOS, openstack, y la configuración básica del nodo lo he convertido en una *template* que me valdrá para generar desde aquí nuevos nodos sin reinstalar cada vez el sistema.
 
@@ -47,6 +47,16 @@ yum install openstack-selinux
 La arquitectura básica inicial debe tener como mínimo un nodo controlador y un nodo de cómputo. Nuevamente de cada uno de estos nodos he generado nuevas *templates*, con sus respectivas diferencias en configuración.
 
 Para empezar estos dos nodos tendrán 4 cores, hasta 16GB de ram y hasta 64GB de disco. Cada nodo requiere dos interfaces de red, una como red de gestión y otra como red *externa*
+
+## Cambios importantes
+
+En los últimos días han pasado cosas que me han obligado a replantearme la visión inicial, así como a desechar parte del trabajo realizado. Entre estas está que RedHat da un volantazo y deja sin soporte CentOS 8, y mata básicamente CentOS. Sin entrar en detalles esto me deja con las opciones de opensuse, ubuntu server, o fedora server. En un futuro cercano  [rocky linux](https://rockylinux.org/) podría ser una solución viable como sustituto espiritual de CentOS, pero en el momento de escribir estas palabras es más una idea que un sistema operativo. Analizaré pros y contras y decidiré que usar. En este caso no puedo recomendar ninguna de las otras distribuciones a priori porque sería una opinión altamente subjetiva.
+
+### Otra alternativa para un “despliegue”
+
+Una posible alternativa, si quieres probar cosas en un entorno básico, es utilizar [microstack](https://microstack.run/). Permite crear un pequeño clúster con las funcionalidades básicas que necesitas para hacer pruebas y aprender a trabajar en openstack.
+
+Pero yo quiero entender openstack, no alquilarme a mi mismo algo que no entiendo como está montado, &#129322; .  Comentarios tontos aparte, microstack está demasiado verde aún para ser una opción viable incluso para un clúster de casa. Pero la sencillez con la que se pueden instalar unos cuantos nodos y empezar a levantar máquinas lo hace muy interesante para hacer pruebas en “local”. Espero que en unos años sea una solución más completa.
 
 **continuará...**
 
