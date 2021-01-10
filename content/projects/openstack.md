@@ -22,6 +22,12 @@ Para empezar:
 
 - https://docs.openstack.org/install-guide/
 - https://wiki.openstack.org/wiki/Main_Page
+
+### Otras fuentes de información
+
+Inicialmente no tenía pensado recurrir a otras fuentes de información externas a la documentación que podemos tener todos a mano. Pero tras las primeras pruebas que hice me entró más curiosidad, y empecé a leer algunos libro. Consulté algo de bibliografía, que en general en este tema es escasa o poco accesible (por ejemplo si pensamos en bibliotecas públicas, incluso en la de ingeniería). 
+
+En esta búsqueda estaba interesado, principalmente, en ejemplos de despliegues para ver diferentes configuraciones y utilidades. Terminé encontrando un libro de hace unos años pero que en general me parece bastante interesante si se está empezando en esto. EL libro en cuestión es [Common OpenStack Deployments](https://www.amazon.es/Common-OpenStack-Deployments-Administrators-Engineers-ebook/dp/B01ITNCBVA/ref=sr_1_1?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=Common+OpenStack+Deployments&qid=1610274966&sr=8-1) y creo que responde bastante bien a las dudas que podría tener un administrador de sistemas de toda la vida que de repente se encuentra ante openstack.
  
 
 ## Dónde
