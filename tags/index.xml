@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Sun, 08 Nov 2020 20:37:34 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Jan 2021 11:00:29 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nvidia, linux, deepops, dgx, slurm</title>
+      <link>/tags/nvidia-linux-deepops-dgx-slurm/</link>
+      <pubDate>Sun, 17 Jan 2021 11:00:29 +0100</pubDate>
+      
+      <guid>/tags/nvidia-linux-deepops-dgx-slurm/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>proyectos, openstack, cloud, buidyourself</title>
       <link>/tags/proyectos-openstack-cloud-buidyourself/</link>

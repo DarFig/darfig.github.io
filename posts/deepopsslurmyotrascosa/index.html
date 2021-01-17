@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class=" negro" lang="es-ES">
+    <meta charset="utf-8">
+    <meta name="viewport" content="witdth=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Press+Start+2P|Source+Code+Pro&display=swap" rel="stylesheet"> 
+   
+    <link rel="stylesheet" href="/css/bulma.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+
+<title>Deepops, slurm y otras cosas de herramientas de despliegue comunitarias - Blg0</title>
+<meta name="generator" content="Hugo 0.80.0" />
+<body class="grisOscuro"><nav class="lateral-navbar">
+
+  <ul class="lateral-navbar-nav bordeVerde">
+    <li class="start2p lateral-nav-item ">
+      <a href="/" class="lateral-nav-link textoVerde">
+        <img src="/img/disk.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Home</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/posts/" class="lateral-nav-link textoVerde">
+        <img src="/img/paper.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Posts</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/projects/" class="lateral-nav-link textoVerde">
+        <img src="/img/flami.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">Projects</span>  
+      </a>
+    </li>
+    <li class="start2p lateral-nav-item ">
+      <a href="/about/" class="lateral-nav-link textoVerde">
+        <img src="/img/gosht.png" class="nav-img iconsP panel-icon" alt="">
+        <span class="textoVerde lateral-nav-text">About</span>  
+      </a>
+    </li>
+    
+  </ul>
+
+</nav>
+<nav class="container-fluid negro ">
+    
+    <div class=" ">
+        
+        <div class=" ">
+            <a class="" href="/">   
+                <figure class="centrar image is-128x128">
+                    <img class="bordeVerde is-rounded" src="https://avatars2.githubusercontent.com/u/13577926?s=460&amp;v=4" width="50" height="50"alt="Brand">
+                 
+                </figure>
+            </a>
+           
+        </div>
+        <div class=" ">
+          <a href=""  class="">  
+            <h1 class="textoCentrado textoVerde start2p title is-1 "> Blg0</h1>
+          </a>
+        </div>
+      
+    
+      </div>
+
+</nav>
+
+
+
+    
+    <div id="content">
+            
+        <h1></h1>
+
+<div  role="main" class="sourceCode section" >
+    <div class="columns">
+        <div class="column is-2">
+            
+        </div>
+
+        <div class="column is-8">
+            <div class="negro bordeVerde">
+                <div class="column textoCentrado">
+                    <h3 class="textoVerde start2p title is-4">Post</h3>
+                </div>
+            </div>
+            <div class="column"></div>
+            <div class="column card grisClaro bordeVerde">
+                <div class="start2p card-header">
+                    <div class="card-header-title is-centered">
+                    Deepops, slurm y otras cosas de herramientas de despliegue comunitarias
+                    </div>
+                </div>
+                <div class="card-content">
+                    
+                    <div class="">
+                        
+                        <div class="content formatoTexto">
+                        
+                        <p>Voy a contar el resumen de lo que he pasado los últimos días para desplegar <a href="https://slurm.schedmd.com/documentation.html">slurm</a>, utilizando la herramienta <a href="https://github.com/NVIDIA/deepops">deepops</a>. Pero lo voy a utilizar sólo como un ejemplo para hablar de los problemas que puedes encontrarte con otras herramientas similares.</p>
+<h2 id="el-contexto">El contexto</h2>
+<p>En resumen <strong>slurm</strong> es una herramienta para gestionar cargas de trabajo, basado en colas, por ejemplo en un clúster  de súper computación.  Que a su vez se ha incluido en la herramienta <strong>deepops</strong>, una serie de playbooks de <a href="https://www.ansible.com/">ansible</a> y scripts pensados para ayudar en la configuración y despliegue de software en los servidores, dgx de nvidia, y similares. Esto es una gran idea, tienes un servidor y una serie de herramientas que te ayudan a desplegar software siguiendo lo que podríamos llamar “buenas prácticas”.</p>
+<p>Así que me dispuse a utilizar <strong>deepops</strong> 20.11 para desplegar <strong>slurm</strong>, siguiendo las recomendaciones de la <a href="https://github.com/NVIDIA/deepops/tree/master/docs/slurm-cluster">documentación</a> .</p>
+<h2 id="las-sorpresas">Las sorpresas</h2>
+<p>Las primeras sorpresas que me encontré fueron enlaces rotos, y poca documentación sobre las variables que debía configurar si decidía modificar un poco el “guión” que viene pre-establecido.  Claro que si me leo los <em>playbooks</em> me voy a enterar de lo que hace cada tarea, pero se supone que el objetivo no es que yo haga ingeniería inversa, sino que  me lea una documentación de como utilizar la herramienta.</p>
+<p>Creo que aquí mi confusión es por venir enlazado desde la documentación de nvidia y ver que el repositorio estaba bajo el perfil de nvidia, cuando la herramienta claramente la mantiene la comunidad. A la que sin duda hay que estarle muy agradecidos porque hace un gran trabajo. Este tipo de situaciones se hacen cada vez más comunes. Es normal que si llegas a un repositorio, mantenido por la comunidad, en el cual hay mucho movimiento y se lanzan mejoras cada poco tiempo, la documentación no esté al día. Nos toca poner un poco de nuestra parte y respetar el trabajo que hacen, muchas veces de manera voluntaria, esas personas. Incluso si lo vemos claro podemos poner de nuestra parte actualizar la versión y enviar un <em>pull request</em>.</p>
+<p>Una vez entendido esto, voy  a comentar errores comunes que podemos encontrarnos con este tipo de herramientas y que pueden darnos algún quebradero de cabeza.</p>
+<h2 id="errores">Errores</h2>
+<p>Tras una serie de dudas, problemas y correos con el soporte, tenía todo listo para usar <em>deepops</em>. Tenía  la instalación del sistema operativo que recomendaba el fabricante y la configuración que general que había recomendado el socio distribuidor. Hice algunos cambios de rigor, y otras manías que se le crean a uno cuando lleva un tiempo en esto de los servidores y sus problemas. Me lancé al ataque.</p>
+<h3 id="al-ataque">Al ataque</h3>
+<p>Configuré las variables tal como se recomendaba, me leí el resto por si las moscas, y desactivé un par de cosas que fuera no se mencionaban, pero que algún alma caritativa había dejado en los comentarios por si te pasabas. Cierto es que no afectaban al funcionamiento, pero eran opcionales y no lo quería.</p>
+<p>Me lancé a la instalación, y tras ejecutarse las primeras tareas vino el primer error. Una variable que no existía o no tenía valor. Todos sabemos como va esto, buscas información, te vas a la documentación (que no dice nada de esa variable). Entonces aumentas el modo <em>verboso</em> al máximo <em>-vvv</em> y te dispones a buscar en que fichero falla. En algunas ocasiones esto no es suficiente, pero insistes y finalmente encuentras una pista y crees que has dado con el fichero en el que se define. En mi caso así lo encontramos, o eso creí, no se mencionaba en ningún otro sitio y parecía que era efectivamente una ejecución para dar valor a la variable y utilizarla, todo en el mismo fichero. Pasamos a buscar una solución, y para no hacerlo largo el error no estaba en este fichero 😅 .</p>
+<p>La causa original del error es más común de lo que parece, <strong>el idioma del sistema operativo</strong>. Cuando una comunidad crea una herramienta como esta, normalmente lo hace sobre instalaciones de sistemas en inglés. Pero en ningún sitio han puesto los <em>requisitos del sistema</em>, ni han mencionado que el idioma sea relevante. Leyendo entre los fichero, descubrí una serie de scripts que obtienen información de comandos como <em>lscpu</em>, <em>free -m</em>, etc, utilizando <em>grep</em>. El caso es que estos comandos muestran salidas traducidas cuando tu sistema operativo no está en inglés. El resultado es que <em>grep</em> no devuelve nada, no se obtiene la información y por tanto las variables no tienen valor, provocando luego un error en tiempo de ejecución.</p>
+<h3 id="ya-está-todo-instalado-pero-no-en-funcionamiento">Ya está todo instalado, pero no en funcionamiento</h3>
+<p>Una vez corriges tu problema, que gracias al código abierto puedes tocar y arreglar por ti mismo, piensas “o que bien todo funciona y es muy fácil de usar”, pero no. Siempre siempre siempre, que se despliega un entorno hay que hacer pruebas. Las herramientas, como <em>deepops</em> suelen tener algunas pruebas  automáticas, que lanzamos y nos devuelven resultados, gráficos, etc. Pero confiarte es un error, porque nunca son suficientes. La comunidad no ha pensado en todos los casos, y menos si han añadido versiones nuevas que a su vez usan versiones nuevas de otros programas.</p>
+<p>En este caso estoy usando <em>slurm</em>, para lanzar tareas, pero por debajo también está <em>docker</em>, etc. Menos de 5 minutos después de terminar el despliegue y las pruebas automáticas, se  le dejó a los usuarios <em>beta</em> probar un uso cotidiano, y inmediatamente descubrieron el primer bug en el que yo no hubiera pensado.</p>
+<p>En casos como este siempre viene bien mirar las <em>issues</em> del repositorio, y efectivamente ahí estaba <a href="https://github.com/NVIDIA/deepops/issues/783">issues</a>. El dns interno de <em>docker</em> se va de fiesta, y luego tus contenedores no tienen conexión con ningún sitio, pero tampoco puedes construir imágenes en local y añadir nuevo software.  Pongo el error, en el que de paso el usuario ha dado una “solución” temporal, por así decirlo, a la vez que lo notifica, y lo pongo porque es un error que puede ocurrir con muchas otras herramientas que usan <em>docker</em> para por debajo. Vale la pena recordar que cuando desplegamos cualquier entorno de contenedores hay que probar la conectividad y la resolución de nombres, tanto en la red interna como con el exterior.</p>
+<h2 id="en-resumen">En resumen</h2>
+<p>Creo que si hay algo que aprender de esto es que cuando recurrimos a herramientas mantenidas de manera desinteresadas, vamos a tener que poner de nuestra parte un poquito más. En cambio obtendremos también las facilidades y el conocimiento para resolvernos nuestros propios problemas sobre la marcha o incluso ayudar a otros.</p>
+<p>Cuando hay poca documentación, toca trabajar un poco más, y hacer más ensayos, pero tal vez descubramos algo útil que probablemente tampoco estaría en la documentación.</p>
+<p>Finalmente, hay que recordar que las pruebas automáticas están muy bien, pero como cada entorno es diferente y complejo. Siempre tendremos que probar por nuestra parte, además si cuentas con usuarios que comúnmente utilicen entornos similares hay que aprovecharlos y dejarlos probar. Nada como la experiencia para saber si algo no está funcionando como debería.</p>
+<p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+                        
+                        </div>
+                        <br>
+                    </div>
+                    
+                </div>
+                <div class=" card-footer is-right">
+                    <div class="card-header-title is-centered">
+                        January 17 - 2021
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        
+    <div class="alpie"></div>   
+    </body><footer  class="negro pie">
+    <div class="container">
+        <div>
+            <br>
+            <p align="center"  class="textoVerde LettCab text-muted">
+                © 2020 by darfig <a href="https://github.com/DarFig">https://github.com/DarFig</a>
+            </p>
+        </div>
+    </div>
+
+</footer>
+
+
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nvidia, linux, deepops, dgx, slurm on Blg0</title>
+    <link>/tags/nvidia-linux-deepops-dgx-slurm/</link>
+    <description>Recent content in nvidia, linux, deepops, dgx, slurm on Blg0</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-ES</language>
+    <lastBuildDate>Sun, 17 Jan 2021 11:00:29 +0100</lastBuildDate><atom:link href="/tags/nvidia-linux-deepops-dgx-slurm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deepops, slurm y otras cosas de herramientas de despliegue comunitarias</title>
+      <link>/posts/deepopsslurmyotrascosa/</link>
+      <pubDate>Sun, 17 Jan 2021 11:00:29 +0100</pubDate>
+      
+      <guid>/posts/deepopsslurmyotrascosa/</guid>
+      <description>&lt;p&gt;Voy a contar el resumen de lo que he pasado los últimos días para desplegar &lt;a href=&#34;https://slurm.schedmd.com/documentation.html&#34;&gt;slurm&lt;/a&gt;, utilizando la herramienta &lt;a href=&#34;https://github.com/NVIDIA/deepops&#34;&gt;deepops&lt;/a&gt;. Pero lo voy a utilizar sólo como un ejemplo para hablar de los problemas que puedes encontrarte con otras herramientas similares.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
