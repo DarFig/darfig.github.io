@@ -62,7 +62,7 @@ En los últimos días han pasado cosas que me han obligado a replantearme la vis
 
 Una posible alternativa, si quieres probar cosas en un entorno básico, es utilizar [microstack](https://microstack.run/). Permite crear un pequeño clúster con las funcionalidades básicas que necesitas para hacer pruebas y aprender a trabajar en openstack.
 
-Pero yo quiero entender openstack, no alquilarme a mi mismo algo que no entiendo como está montado, &#129322; .  Comentarios tontos aparte, microstack está demasiado verde aún para ser una opción viable incluso para un clúster de casa. Pero la sencillez con la que se pueden instalar unos cuantos nodos y empezar a levantar máquinas lo hace muy interesante para hacer pruebas en “local”. Espero que en unos años sea una solución más completa.
+Pero yo quiero entender openstack, no alquilarme a mi mismo algo que no entiendo como está montado, &#129322; . Comentarios tontos aparte, microstack está demasiado verde aún para ser una opción viable incluso para un clúster de casa. Pero la sencillez con la que se pueden instalar unos cuantos nodos y empezar a levantar máquinas lo hace muy interesante para hacer pruebas en “local”. Espero que en unos años sea una solución más completa.
 
 **continuará...**
 
