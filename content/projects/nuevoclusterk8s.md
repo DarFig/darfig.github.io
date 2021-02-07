@@ -23,7 +23,7 @@ Primero dejaré por aquí los enlaces de la documentación que vaya consultando.
 
 Hay muchas maneras de tener un clúster de kubernetes, y muchos sitios para desplegarlo, con herramientas automáticas y con alojamiento o sin el. En este caso me voy a aprovisionar mi propia infraestructura, al menos inicialmente. Recurriré en parte a nodos en *paravirtualización* y en parte a nodos físicos medio volátiles que serán *workers* intercambiables.
 
-Para empezar un sistema de 3 nodos **master** y 3 nodos **worker**, más un nodo para el **load balancer** y algún otro servicio extra que me pueda interesar.
+Para empezar un sistema de 3 nodos **master** y 3 nodos **worker**, más un nodo para el **load balancer** y algún otro servicio extra que me pueda interesar. Todos tendrán Ubuntu 20.04 como sistema operativo.
 
 
 | nombre     | ip               | funciones  |
