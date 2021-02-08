@@ -2,7 +2,7 @@
 title: "Nuevo Clúster K8S"
 date: 2021-02-01T16:24:34+01:00
 draft: true
-image: "k8s.png"
+image: "kubeadm.png"
 tags: "proyectos, k8s, kubernetes, clúster, kubectl, kubeadm"
 ---
 
@@ -26,7 +26,7 @@ Hay muchas maneras de tener un clúster de kubernetes, y muchos sitios para desp
 Para empezar un sistema de 3 nodos **master** y 3 nodos **worker**, más un nodo para el **load balancer** y algún otro servicio extra que me pueda interesar. Todos tendrán Ubuntu 20.04 como sistema operativo.
 
 
-| nombre     | ip               | funciones  |
+| nombre     | ip              | sistema | funciones  |
 | ------------ |:-------------:| ------------:|
 | klb-1         | 172.17.1.201 | load balancer |
 | kmaster-1  | 172.17.1.200 | control/master/etcd  |
