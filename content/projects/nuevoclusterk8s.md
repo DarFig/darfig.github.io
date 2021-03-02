@@ -26,15 +26,15 @@ Hay muchas maneras de tener un clúster de kubernetes, y muchos sitios para desp
 Para empezar un sistema de 3 nodos **master** y 3 nodos **worker**, más un nodo para el **load balancer** y algún otro servicio extra que me pueda interesar. Todos tendrán Ubuntu 20.04 como sistema operativo.
 
 
-| nombre     | ip              | sistema | funciones  |
-| ------------ |:-------------:| ------------:|
-| klb-1         | 172.17.1.200 | load balancer |
-| kubemaster-1  | 172.17.1.201 | control/master/etcd  |
-| kubemaster-2  | 172.17.1.202 | control/master/etcd  |
-| kubemaster-3  | 172.17.1.203 | control/master/ etcd  |
-| kubeworker-1 | 172.17.1.101 | worker  |
-| kubeworker-2 | 172.17.1.102 | worker  |
-| kubeworker-3 | 172.17.1.103 | worker  |
+nombre     | ip              |  funciones  
+ ------------ |-------------| ------------
+ klb-1         | 172.17.1.200 | load balancer 
+ kubemaster-1  | 172.17.1.201 | control/master/etcd  
+ kubemaster-2  | 172.17.1.202 | control/master/etcd  
+ kubemaster-3  | 172.17.1.203 | control/master/ etcd  
+ kubeworker-1 | 172.17.1.101 | worker  
+ kubeworker-2 | 172.17.1.102 | worker  
+ kubeworker-3 | 172.17.1.103 | worker  
 
 ## Instalación
 
@@ -188,7 +188,7 @@ Podemos administrar nuestro clúster desde ota máquina copiando la configuraci�
 
 ```bash
 mkdir ~/.kube
-scp root@172.16.12.201:/etc/kubernetes/admin.conf ~/.kube/config
+scp root@172.17.1.201:/etc/kubernetes/admin.conf ~/.kube/config
 
 # probar
 kubectl cluster-info
