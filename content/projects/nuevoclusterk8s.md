@@ -1,7 +1,7 @@
 ---
 title: "Nuevo Clúster K8S"
 date: 2021-02-01T16:24:34+01:00
-draft: true
+draft: false
 image: "kubeadm.png"
 tags: "proyectos, k8s, kubernetes, clúster, kubectl, kubeadm"
 ---
@@ -28,7 +28,7 @@ Para empezar un sistema de 3 nodos **master** y 3 nodos **worker**, más un nodo
 
 nombre     | ip              |  funciones  
  ------------ |-------------| ------------
- klb-1         | 172.17.1.200 | load balancer 
+ klb-1         | 172.17.1.200 | load balancer
  kubemaster-1  | 172.17.1.201 | control/master/etcd  
  kubemaster-2  | 172.17.1.202 | control/master/etcd  
  kubemaster-3  | 172.17.1.203 | control/master/ etcd  

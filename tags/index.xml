@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Sun, 17 Jan 2021 11:00:29 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Feb 2021 16:24:34 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>proyectos, k8s, kubernetes, clúster, kubectl, kubeadm</title>
+      <link>/tags/proyectos-k8s-kubernetes-cl%C3%BAster-kubectl-kubeadm/</link>
+      <pubDate>Mon, 01 Feb 2021 16:24:34 +0100</pubDate>
+      
+      <guid>/tags/proyectos-k8s-kubernetes-cl%C3%BAster-kubectl-kubeadm/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>nvidia, linux, deepops, dgx, slurm</title>
       <link>/tags/nvidia-linux-deepops-dgx-slurm/</link>

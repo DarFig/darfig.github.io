@@ -97,7 +97,170 @@
                         
                         <div class="content formatoTexto">
                             <h2 id="el-proyecto">El proyecto</h2>
-<p>Voy a trastear con un nuevo clúster k8s, y he decidido desplegarlo con kubeadm, nodo a nodo para ir probando algunas cosas. Puede que luego vaya &ldquo;automatizando&rdquo; algunas tareas seg´un vea lo que necesite.</p>
+<p>Voy a trastear con un nuevo clúster k8s, y he decidido desplegarlo con <em>kubeadm</em>, o no, ya veremos. Nodo a nodo para ir probando algunas cosas. Puede que luego vaya &ldquo;automatizando&rdquo; algunas tareas según vea lo que necesite.</p>
+<h2 id="documentación">Documentación</h2>
+<p>Primero dejaré por aquí los enlaces de la documentación que vaya consultando. Aunque realmente hay cosas de las que me acuerdo y otras que no suelo mirar, creo que es mejor validar muchas cosas antes de hacerlas.</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/">instalación de kubeadm</a></li>
+<li><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/">clúster kubeadm</a></li>
+</ul>
+<h2 id="dónde">Dónde</h2>
+<p>Hay muchas maneras de tener un clúster de kubernetes, y muchos sitios para desplegarlo, con herramientas automáticas y con alojamiento o sin el. En este caso me voy a aprovisionar mi propia infraestructura, al menos inicialmente. Recurriré en parte a nodos en <em>paravirtualización</em> y en parte a nodos físicos medio volátiles que serán <em>workers</em> intercambiables.</p>
+<p>Para empezar un sistema de 3 nodos <strong>master</strong> y 3 nodos <strong>worker</strong>, más un nodo para el <strong>load balancer</strong> y algún otro servicio extra que me pueda interesar. Todos tendrán Ubuntu 20.04 como sistema operativo.</p>
+<table>
+<thead>
+<tr>
+<th>nombre</th>
+<th>ip</th>
+<th>funciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>klb-1</td>
+<td>172.17.1.200</td>
+<td>load balancer</td>
+</tr>
+<tr>
+<td>kubemaster-1</td>
+<td>172.17.1.201</td>
+<td>control/master/etcd</td>
+</tr>
+<tr>
+<td>kubemaster-2</td>
+<td>172.17.1.202</td>
+<td>control/master/etcd</td>
+</tr>
+<tr>
+<td>kubemaster-3</td>
+<td>172.17.1.203</td>
+<td>control/master/ etcd</td>
+</tr>
+<tr>
+<td>kubeworker-1</td>
+<td>172.17.1.101</td>
+<td>worker</td>
+</tr>
+<tr>
+<td>kubeworker-2</td>
+<td>172.17.1.102</td>
+<td>worker</td>
+</tr>
+<tr>
+<td>kubeworker-3</td>
+<td>172.17.1.103</td>
+<td>worker</td>
+</tr>
+</tbody>
+</table>
+<h2 id="instalación">Instalación</h2>
+<p>Para empezar recomiendo configurar desde un nodo acceso ssh mediante clave rsa. Luego hay que preparar el load balancer, un runtime(utilizaré containerd), e instalar los componentes en los nodos de kubernetes; finalmente pasar a desplegar y configurar los nodos.</p>
+<h3 id="instalando-el-loadbalancer">Instalando el loadbalancer</h3>
+<p>Para empezar en el loadbalancer <strong>klb-1</strong> instalamos y configuramos el haproxy.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apt update <span style="color:#f92672">&amp;&amp;</span> apt install -y haproxy
+frontend kubernetes-frontend
+    bind 172.17.1.200:6443
+    mode tcp
+    option tcplog
+    default_backend kubernetes-backend
+
+backend kubernetes-backend
+    mode tcp
+    option tcp-check
+    balance roundrobin
+    server kubemaster-1 172.17.1.201:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
+    server kubemaster-2 172.17.1.202:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
+    server kubemaster-3 172.17.1.203:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
+
+</code></pre></div><h3 id="preparando-los-nodos">Preparando los nodos</h3>
+<p>Hay que asegurarse de desactivar el swap si existe. En caso de estar utilizando ufw probablemente también nos interese abrir puertos o quitarlo y añadir el firewall por delante del loadbalancer. Asumo que tampoco hay configuraciones raras en el iptables, de todas maneras hay una lista de los puertos requeridos por kubernetes, especialmente en la red de comunicacón entre los nodos.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#swap</span>
+swapoff -a; sed -i <span style="color:#e6db74">&#39;/swap/d&#39;</span> /etc/fstab
+
+<span style="color:#75715e">#ufw</span>
+ufw disable
+</code></pre></div><p>Hay que actualizar también sysctl, para el networking de k8s.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+</span><span style="color:#e6db74">net.bridge.bridge-nf-call-iptables  = 1
+</span><span style="color:#e6db74">net.ipv4.ip_forward                 = 1
+</span><span style="color:#e6db74">net.bridge.bridge-nf-call-ip6tables = 1
+</span><span style="color:#e6db74">EOF</span>
+
+<span style="color:#75715e"># finalmente</span>
+sudo sysctl –system
+</code></pre></div><p>En este caso he decidido usar containerd en lugar de docker como runtime:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install -y containerd
+
+<span style="color:#75715e"># Configure containerd</span>
+sudo mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+
+<span style="color:#75715e"># Restart containerd</span>
+sudo systemctl restart containerd
+
+
+cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+</span><span style="color:#e6db74">br_netfilter
+</span><span style="color:#e6db74">EOF</span>
+
+cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/containerd.conf
+</span><span style="color:#e6db74">overlay
+</span><span style="color:#e6db74">br_netfilter
+</span><span style="color:#e6db74">EOF</span>
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+</code></pre></div><h3 id="setup-de-kubeadm-y-otros-componentes">Setup de kubeadm y otros componentes</h3>
+<p>Para la instalación hay que seguir las instrucciones de la documentación oficial casi en un paso a paso.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+</span><span style="color:#e6db74">deb https://apt.kubernetes.io/ kubernetes-xenial main
+</span><span style="color:#e6db74">EOF</span>
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+</code></pre></div><h2 id="creando-y-configurando-el-clúster">Creando y configurando el clúster</h2>
+<h3 id="masterscontrollers">Masters/controllers</h3>
+<p>En cualquiera de los nodos master, en mi caso el primero, iniciamos el clúster. Apuntamos a la IP del loadbalancer como endpoint para inicializar.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubeadm init --control-plane-endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;172.17.1.200:6443&#34;</span> --upload-certs --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.201 --pod-network-cidr<span style="color:#f92672">=</span>10.0.0.0/8
+</code></pre></div><p>Nos devolverá el token y los datos que necesitaremos a continuación para añadir nuevos nodos. Copiarlos para luego. Asegurandose de mantener a salvo el token y los certificados.</p>
+<p><strong>Añadir kubemaster-2 y kubemaster-3</strong></p>
+<p>Es importante recordar que apuntaremos al loadbalancer para unirnos, y además pasaremos la opción &ndash;apiserver-advertise-address= con la ip de cada master.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># kubemaster-2</span>
+sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --control-plane --certificate-key &lt;key&gt; --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.202
+
+<span style="color:#75715e"># kubemaster-3</span>
+sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --control-plane --certificate-key &lt;key&gt; --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.203
+</code></pre></div><h3 id="workerscomputers">Workers/computers</h3>
+<p>Para unir nuevos workers utilizamos igualmente el comando con los datos devueltos, en este caso sin las opciones de &ndash;control-plane ni &ndash;apiserver-advertise-address.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt;
+
+</code></pre></div><h3 id="añadir-la-red">Añadir la red</h3>
+<p>Finalmente añadiremos el cni para la red interna de kubernetes. En este caso probé en su moento calico, y ahora utilizaré flannel.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo kubectl --kubeconfig<span style="color:#f92672">=</span>/etc/kubernetes/admin.conf create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+</code></pre></div><h2 id="administración">Administración</h2>
+<h3 id="como-un-usuario-regular">Como un usuario regular</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown <span style="color:#66d9ef">$(</span>id -u<span style="color:#66d9ef">)</span>:<span style="color:#66d9ef">$(</span>id -g<span style="color:#66d9ef">)</span> $HOME/.kube/config
+</code></pre></div><h3 id="remota">Remota</h3>
+<p>Podemos administrar nuestro clúster desde ota máquina copiando la configuración, siempre y cuando tengamos además kubectl instalado en dicha máquina.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir ~/.kube
+scp root@172.17.1.201:/etc/kubernetes/admin.conf ~/.kube/config
+
+<span style="color:#75715e"># probar</span>
+kubectl cluster-info
+kubectl get nodes
+</code></pre></div><h2 id="se-vienen-cambios">Se vienen cambios</h2>
+<p><strong>continuará&hellip;</strong></p>
+<p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
                         </div>
                         <br>
                     </div>
