@@ -180,14 +180,18 @@ swapoff -a; sed -i <span style="color:#e6db74">&#39;/swap/d&#39;</span> /etc/fst
 <span style="color:#75715e">#ufw</span>
 ufw disable
 </code></pre></div><p>Hay que actualizar también sysctl, para el networking de k8s.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+</span><span style="color:#e6db74">br_netfilter
+</span><span style="color:#e6db74">EOF</span>
+
+cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
 </span><span style="color:#e6db74">net.bridge.bridge-nf-call-iptables  = 1
 </span><span style="color:#e6db74">net.ipv4.ip_forward                 = 1
 </span><span style="color:#e6db74">net.bridge.bridge-nf-call-ip6tables = 1
 </span><span style="color:#e6db74">EOF</span>
 
 <span style="color:#75715e"># finalmente</span>
-sudo sysctl –system
+sudo sysctl --system
 </code></pre></div><p>En este caso he decidido usar containerd en lugar de docker como runtime:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install -y containerd
 
