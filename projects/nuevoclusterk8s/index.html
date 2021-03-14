@@ -97,12 +97,20 @@
                         
                         <div class="content formatoTexto">
                             <h2 id="el-proyecto">El proyecto</h2>
-<p>Voy a trastear con un nuevo clúster k8s, y he decidido desplegarlo con <em>kubeadm</em>, o no, ya veremos. Nodo a nodo para ir probando algunas cosas. Puede que luego vaya &ldquo;automatizando&rdquo; algunas tareas según vea lo que necesite.</p>
+<p>Voy a trastear con un nuevo clúster k8s, y he decidido desplegarlo con <em>kubeadm</em>, o no, ya veremos. Nodo a nodo para ir probando algunas cosas. Puede que luego vaya &ldquo;automatizando&rdquo; algunas</p>
+<p>tareas según vea lo que necesite.</p>
+<p>Segunda fase, cambiar de <em>kubeadm</em> a <em>k0s</em> por probar otras soluciones.</p>
 <h2 id="documentación">Documentación</h2>
 <p>Primero dejaré por aquí los enlaces de la documentación que vaya consultando. Aunque realmente hay cosas de las que me acuerdo y otras que no suelo mirar, creo que es mejor validar muchas cosas antes de hacerlas.</p>
+<h3 id="kubeadm">Kubeadm</h3>
 <ul>
 <li><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/">instalación de kubeadm</a></li>
 <li><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/">clúster kubeadm</a></li>
+</ul>
+<h3 id="k0s">K0S</h3>
+<ul>
+<li><a href="https://docs.k0sproject.io/v0.11.0/">k0s docs</a></li>
+<li><a href="https://docs.k0sproject.io/v0.11.0/k0s-multi-node/">k0s multinode</a></li>
 </ul>
 <h2 id="dónde">Dónde</h2>
 <p>Hay muchas maneras de tener un clúster de kubernetes, y muchos sitios para desplegarlo, con herramientas automáticas y con alojamiento o sin el. En este caso me voy a aprovisionar mi propia infraestructura, al menos inicialmente. Recurriré en parte a nodos en <em>paravirtualización</em> y en parte a nodos físicos medio volátiles que serán <em>workers</em> intercambiables.</p>
@@ -261,8 +269,63 @@ scp root@172.17.1.201:/etc/kubernetes/admin.conf ~/.kube/config
 <span style="color:#75715e"># probar</span>
 kubectl cluster-info
 kubectl get nodes
-</code></pre></div><h2 id="se-vienen-cambios">Se vienen cambios</h2>
-<p><strong>continuará&hellip;</strong></p>
+</code></pre></div><hr>
+<h2 id="el-cambio-a-k0s">El cambio a K0S</h2>
+<p>Después de un tiempo jugando con kubeadm, y con los componentes por separado, estamos listo para mover nuestro home-clúster a una solución más “empaquetada”. En este caso de paso voy a probar <em>k0s</em>, una solución empaquetada de k8s. Que en su versión actual ya viene con <em>containerd</em> directamente.</p>
+<p>Como principal ventaja es un binario que ya lo hace todo por ti, no tienes que preocuparte por preparar el nodo ni instalar nada en el. Yo personalmente sigo recomendando revisar el tema del swap y del firewall. También es interesante leer atentamente la documentación porque todo dependerá de lo que pongamos en el fichero de configuración, además nos ahorraremos errores tontos porque algunos comandos se esperan una entrada y si está mal recibes muy poca información de que falla, en algunos casos incluso continúa y no te enteras.</p>
+<h3 id="la-instalación">La instalación</h3>
+<p>El proceso de instalación es de lo más sencillo, y prácticamente es seguir la guía en un paso a paso. Pero siempre habiendo leído antes la documentación, porque hay algunos puntos curiosos.</p>
+<ul>
+<li>Empezamos bajándonos el binario y dejándolo en una ruta como un programa más, en cada nodo que queramos que forme parte del clúster. Ahora hay un script para obtener el binario, pero también lo podemos obtener desde github, o incluso compilarlo manualmente.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo mv k0s /usr/local/bin/k0s
+sudo chmod +x /usr/local/bin/k0s
+</code></pre></div><ul>
+<li>Podemos generar el fichero estándar de configuración con un simple comando:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo k0s default-config &gt; k0s.yaml
+</code></pre></div><ul>
+<li>Ahora pasamos al momento en el que podemos personalizar las opciones antes de iniciar el despliegue, y añadir algunos “extras” al clúster, como la instalación de extensiones basadas en helm.</li>
+</ul>
+<p>Añadí metallb como extensión <a href="https://docs.k0sproject.io/v0.11.0/examples/traefik-ingress/?h=+metallb">traefik y metallb</a> pero no añadí traefik porque en este caso voy a utilizar mi propia configuración de traefik más adelante hay otro montón de extensiones y cambios que podemos hacer.</p>
+<p>Si no usamos la configuración por defecto, tenemos que pasar nuestra configuración con la opción <em>-c o &ndash;config</em>. Aquí descubrí que con la opción <em>install</em> tenemos que pasar la ruta absoluta  a los ficheros, porque esto lo que hace es escribir un fichero que luego controlaremos con <em>systemctl</em> y estará escrito tal cual la ruta que pongamos.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo k0s install controller -c /path/absoluto/al/fichero/configuración
+
+sudo systemctl start k0scontroller
+<span style="color:#75715e"># ahora oficialmente hemos arrancado el control-plane con todo</span>
+</code></pre></div><ul>
+<li>Podemos utilizar <em>sudo k0s kubectl</em>, o lo que nos interesa para acceso desde otro nodo o con otro usuario:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">clusterUser<span style="color:#f92672">=</span>miuser
+sudo k0s kubeconfig create --groups <span style="color:#e6db74">&#34;system:masters&#34;</span> $clusterUser &gt; k0s.config
+<span style="color:#75715e"># el contenido de este fichero lo podemos poner en ~/.kube/config del usuario</span>
+
+<span style="color:#75715e"># instalamos kubectl, en ubuntu podemos usar snap, o como ya vimos antes cuando kubeadm</span>
+
+<span style="color:#75715e"># y ahora creamos un rol admin</span>
+kubectl create clusterrolebinding --kubeconfig k0s.config testUser-admin-binding --clusterrole<span style="color:#f92672">=</span>admin --user<span style="color:#f92672">=</span>$clusterUser
+
+</code></pre></div><ul>
+<li>Añadir workers requiere generar tokens que luego pasaremos al binario en el nodo que será worker.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># en el control-plane</span>
+k0s token create --role<span style="color:#f92672">=</span>worker &gt; token-file
+<span style="color:#75715e"># o siqueremos que expire pasado un timepo</span>
+k0s token create --role<span style="color:#f92672">=</span>worker --expiry<span style="color:#f92672">=</span>100h &gt; token-file
+
+<span style="color:#75715e"># en el nuevo worker</span>
+k0s install worker --token-file /path/to/token/file
+
+</code></pre></div><ul>
+<li>Para añadir un nuevo nodo control-plane la teoría dice que es igual que con los workers, pero antes revisemos la documentación del <em>clusterHA</em> y recomendaciones específicas, si nos interesa.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># en el control-plane</span>
+k0s token create --role<span style="color:#f92672">=</span>controller --expiry<span style="color:#f92672">=</span>1h &gt; token-control
+
+<span style="color:#75715e"># en el nuevo worker</span>
+k0s install controller --token-file /path/to/token/file
+
+</code></pre></div><p><strong>continuará&hellip;</strong></p>
 <p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         </div>
