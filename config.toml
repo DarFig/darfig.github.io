@@ -8,3 +8,8 @@ publishdir = "."
     UserIcon = "https://avatars2.githubusercontent.com/u/13577926?s=460&v=4"
     AuthorName = "Darfig"
     GitHubuser = "darfig"
+[markup]
+  [markup.tableOfContents]
+    endLevel = 5
+    ordered = false
+    startLevel = 1

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>proyectos, k8s, kubernetes, clúster, kubectl, kubeadm, k0s, k0sctl on Blg0</title>
+    <link>/tags/proyectos-k8s-kubernetes-cl%C3%BAster-kubectl-kubeadm-k0s-k0sctl/</link>
+    <description>Recent content in proyectos, k8s, kubernetes, clúster, kubectl, kubeadm, k0s, k0sctl on Blg0</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-ES</language>
+    <lastBuildDate>Mon, 01 Feb 2021 16:24:34 +0100</lastBuildDate><atom:link href="/tags/proyectos-k8s-kubernetes-cl%C3%BAster-kubectl-kubeadm-k0s-k0sctl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nuevo Clúster K8S</title>
+      <link>/projects/nuevoclusterk8s/</link>
+      <pubDate>Mon, 01 Feb 2021 16:24:34 +0100</pubDate>
+      
+      <guid>/projects/nuevoclusterk8s/</guid>
+      <description>&lt;h2 id=&#34;el-proyecto&#34;&gt;El proyecto&lt;/h2&gt;
+&lt;p&gt;Voy a trastear con un nuevo clúster k8s, y he decidido desplegarlo con &lt;em&gt;kubeadm&lt;/em&gt;, o no, ya veremos. Nodo a nodo para ir probando algunas cosas. Puede que luego vaya &amp;ldquo;automatizando&amp;rdquo; algunas&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

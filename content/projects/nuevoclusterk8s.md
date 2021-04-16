@@ -3,7 +3,7 @@ title: "Nuevo Clúster K8S"
 date: 2021-02-01T16:24:34+01:00
 draft: false
 image: "kubeadm.png"
-tags: "proyectos, k8s, kubernetes, clúster, kubectl, kubeadm"
+tags: "proyectos, k8s, kubernetes, clúster, kubectl, kubeadm, k0s, k0sctl"
 ---
 
 ## El proyecto
@@ -283,7 +283,7 @@ k0s install controller --token-file /path/to/token/file
 
 ```
 
-### Despliegue a lo bestia(instalación "automática")
+### Despliegue a lo bestia (instalación "automática")
 
 #### **Antecedentes**
 

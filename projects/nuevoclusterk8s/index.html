@@ -86,9 +86,63 @@
             </div>
             <div class="column"></div>
             <div class="column card grisClaro bordeVerde">
+                
                 <div class="start2p card-header">
                     <div class="card-header-title is-centered">
                     Nuevo Clúster K8S
+                    </div>
+                </div>
+                <div class="card-content"></div>
+                <div class="start2p card-header">
+                    <div class="content" style="font-size: 70%; 
+                        color: #92d192;">
+                        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#el-proyecto">El proyecto</a></li>
+        <li><a href="#documentación">Documentación</a>
+          <ul>
+            <li><a href="#kubeadm">Kubeadm</a></li>
+            <li><a href="#k0s">K0S</a></li>
+          </ul>
+        </li>
+        <li><a href="#dónde">Dónde</a></li>
+        <li><a href="#instalación">Instalación</a>
+          <ul>
+            <li><a href="#instalando-el-loadbalancer">Instalando el loadbalancer</a></li>
+            <li><a href="#preparando-los-nodos">Preparando los nodos</a></li>
+            <li><a href="#setup-de-kubeadm-y-otros-componentes">Setup de kubeadm y otros componentes</a></li>
+          </ul>
+        </li>
+        <li><a href="#creando-y-configurando-el-clúster">Creando y configurando el clúster</a>
+          <ul>
+            <li><a href="#masterscontrollers">Masters/controllers</a></li>
+            <li><a href="#workerscomputers">Workers/computers</a></li>
+            <li><a href="#añadir-la-red">Añadir la red</a></li>
+          </ul>
+        </li>
+        <li><a href="#administración">Administración</a>
+          <ul>
+            <li><a href="#como-un-usuario-regular">Como un usuario regular</a></li>
+            <li><a href="#remota">Remota</a></li>
+          </ul>
+        </li>
+        <li><a href="#el-cambio-a-k0s">El cambio a K0S</a>
+          <ul>
+            <li><a href="#la-instalación-manual">La instalación manual</a></li>
+            <li><a href="#despliegue-a-lo-bestia-instalación-automática">Despliegue a lo bestia (instalación &ldquo;automática&rdquo;)</a>
+              <ul>
+                <li><a href="#antecedentes"><strong>Antecedentes</strong></a></li>
+                <li><a href="#k0sctl"><strong>k0sctl</strong></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
                     </div>
                 </div>
                 <div class="card-content">
@@ -326,7 +380,7 @@ k0s token create -c /path/configuración --role<span style="color:#f92672">=</sp
 <span style="color:#75715e"># en el nuevo worker</span>
 k0s install controller --token-file /path/to/token/file
 
-</code></pre></div><h3 id="despliegue-a-lo-bestiainstalación-automática">Despliegue a lo bestia(instalación &ldquo;automática&rdquo;)</h3>
+</code></pre></div><h3 id="despliegue-a-lo-bestia-instalación-automática">Despliegue a lo bestia (instalación &ldquo;automática&rdquo;)</h3>
 <h4 id="antecedentes"><strong>Antecedentes</strong></h4>
 <p>Venimos de desplegar manualmente el clúster de <em>k0s</em>, cosa que recomiendo hacer al menos una vez con un par de nodos si quieres entender como funciona por detrás lo que vamos a usar a partir de ahora.</p>
 <p>Bien, durante este despliegue manual no mencioné nada de <em>High availability (HA)</em>, hay algo que hay que entender, para que un clúster tenga HA debemos tener un “punto único de acceso” al plano de control desde el exterior pero por detrás serán  múltiples nodos. Esto en <em>kubeadm</em> lo conseguíamos con un nodo <em>load balancer (lb)</em> y <em>proxy HA</em> que recibe las peticiones y las envía al backend de nodos de control. En <em>k0s</em> también recuperaremos dicho nodo y vamos a configurarlo según los puertos requeridos. (Recomendaría poner por delante del lb- HA algún control de tráfico como un firewall si queremos asegurarnos de a que tráfico se le permite acceder a ciertos puertos del clúster)</p>

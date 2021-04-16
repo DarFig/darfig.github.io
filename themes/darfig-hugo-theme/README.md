@@ -19,6 +19,11 @@ theme = "darfig-hugo-theme"
     UserIcon = "<user icon url>"
     AuthorName = "<name>"
     GitHubuser = "<git user>"
+[markup]
+  [markup.tableOfContents]
+    endLevel = 5
+    ordered = false
+    startLevel = 1
 ```
 
 ### Tree
