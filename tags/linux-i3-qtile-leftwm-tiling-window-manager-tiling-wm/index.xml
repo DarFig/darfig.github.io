@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux, i3, qtile, leftwm, tiling window manager, tiling wm on Blg0</title>
+    <link>/tags/linux-i3-qtile-leftwm-tiling-window-manager-tiling-wm/</link>
+    <description>Recent content in linux, i3, qtile, leftwm, tiling window manager, tiling wm on Blg0</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-ES</language>
+    <lastBuildDate>Fri, 04 Jun 2021 22:49:25 +0200</lastBuildDate><atom:link href="/tags/linux-i3-qtile-leftwm-tiling-window-manager-tiling-wm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tiling Windows Managers</title>
+      <link>/posts/mirandotiling/</link>
+      <pubDate>Fri, 04 Jun 2021 22:49:25 +0200</pubDate>
+      
+      <guid>/posts/mirandotiling/</guid>
+      <description>&lt;p&gt;Llevo un tiempo probando diferentes &amp;ldquo;tiling windows manager&amp;rdquo;, principalmente porque en el portátil se me hace incómodo depender del ratón para muchas cosas. Durante este proceso he tenido la oportunidad de probar y modificar varios. Durante este proceso he llegado a algunas conclusiones.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

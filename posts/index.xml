@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Sun, 17 Jan 2021 11:00:29 +0100</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Jun 2021 22:49:25 +0200</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tiling Windows Managers</title>
+      <link>/posts/mirandotiling/</link>
+      <pubDate>Fri, 04 Jun 2021 22:49:25 +0200</pubDate>
+      
+      <guid>/posts/mirandotiling/</guid>
+      <description>&lt;p&gt;Llevo un tiempo probando diferentes &amp;ldquo;tiling windows manager&amp;rdquo;, principalmente porque en el portátil se me hace incómodo depender del ratón para muchas cosas. Durante este proceso he tenido la oportunidad de probar y modificar varios. Durante este proceso he llegado a algunas conclusiones.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Deepops, slurm y otras cosas de herramientas de despliegue comunitarias</title>
       <link>/posts/deepopsslurmyotrascosa/</link>

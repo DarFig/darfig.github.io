@@ -1,7 +1,7 @@
 ---
 title: "Tiling Windows Managers"
-date: 2021-05-27T22:49:25+02:00
-draft: true
+date: 2021-06-04T22:49:25+02:00
+draft: false
 tags: "linux, i3, qtile, leftwm, tiling window manager, tiling wm"
 ---
 

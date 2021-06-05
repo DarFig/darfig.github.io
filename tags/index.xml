@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Mon, 01 Feb 2021 16:24:34 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Jun 2021 22:49:25 +0200</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux, i3, qtile, leftwm, tiling window manager, tiling wm</title>
+      <link>/tags/linux-i3-qtile-leftwm-tiling-window-manager-tiling-wm/</link>
+      <pubDate>Fri, 04 Jun 2021 22:49:25 +0200</pubDate>
+      
+      <guid>/tags/linux-i3-qtile-leftwm-tiling-window-manager-tiling-wm/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>proyectos, k8s, kubernetes, clúster, kubectl, kubeadm, k0s, k0sctl</title>
       <link>/tags/proyectos-k8s-kubernetes-cl%C3%BAster-kubectl-kubeadm-k0s-k0sctl/</link>
