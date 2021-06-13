@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ldap, linux, nss, libnss, libnss-ldap, libnss-ldapd on Blg0</title>
+    <link>/tags/ldap-linux-nss-libnss-libnss-ldap-libnss-ldapd/</link>
+    <description>Recent content in ldap, linux, nss, libnss, libnss-ldap, libnss-ldapd on Blg0</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-ES</language>
+    <lastBuildDate>Sun, 13 Jun 2021 11:57:29 +0200</lastBuildDate><atom:link href="/tags/ldap-linux-nss-libnss-libnss-ldap-libnss-ldapd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Error nss_ldap</title>
+      <link>/posts/errornss_ldap/</link>
+      <pubDate>Sun, 13 Jun 2021 11:57:29 +0200</pubDate>
+      
+      <guid>/posts/errornss_ldap/</guid>
+      <description>&lt;p&gt;Trabajando con libnss-ldap en un servidor ubuntu me he encontrado recientemente un error que puede dar más de un quebradero de cabeza pero realmente es muy sencillo de solucionar.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

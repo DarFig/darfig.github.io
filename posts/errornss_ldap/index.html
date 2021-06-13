@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/navbar.css" />
 
-<title>About - Blg0</title>
+<title>Error nss_ldap - Blg0</title>
 <meta name="generator" content="Hugo 0.83.1" />
 <body class="grisOscuro"><nav class="lateral-navbar">
 
@@ -81,14 +81,30 @@
         <div class="column is-8">
             <div class="negro bordeVerde">
                 <div class="column textoCentrado">
-                    <h3 class="textoVerde start2p title is-4">About</h3>
+                    <h3 class="textoVerde start2p title is-4">Post</h3>
                 </div>
             </div>
             <div class="column"></div>
             <div class="column card grisClaro bordeVerde">
                 <div class="start2p card-header">
                     <div class="card-header-title is-centered">
-                    About
+                    Error nss_ldap
+                    </div>
+                </div>
+                <div class="card-content"></div>
+                <div class="start2p card-header">
+                    <div class="content" style="font-size: 70%;
+                        color: #92d192;">
+                        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#el-error">El error</a></li>
+        <li><a href="#una-posible-solución-rápida">Una posible solución rápida</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
                     </div>
                 </div>
                 <div class="card-content">
@@ -96,9 +112,20 @@
                     <div class="">
                         
                         <div class="content formatoTexto">
-                        <h2 id="heading"></h2>
-<p><em>Computer engineering</em> and <em>sysadmin</em> 🤓.</p>
-
+                        
+                        <p>Trabajando con libnss-ldap en un servidor ubuntu me he encontrado recientemente un error que puede dar más de un quebradero de cabeza pero realmente es muy sencillo de solucionar.</p>
+<h2 id="el-error">El error</h2>
+<p>Mirando los logs me he encontrado lo siguiente:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nss_ldap: could not connect to any LDAP server as <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span> - Can<span style="color:#960050;background-color:#1e0010">&#39;</span>t contact LDAP server
+</code></pre></div><p>Seguido de algún   que otro fallo más. Aunque todo parece funcionar bien, el fallo es recurrente y está afectando algunos servicios.</p>
+<h2 id="una-posible-solución-rápida">Una posible solución rápida</h2>
+<p>Después de leer un poco decidí probar a sustituir libnss-ldap con libnss-ldapd.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apt install libnss-ldapd
+systemctl restart systemd-logind
+</code></pre></div><p>Tras la instalación pedirá reconfigurar el servicio, pero si ya teníamos configurado correctamente ldap deberían salirnos las mismas opciones que ya teníamos seleccionadas.</p>
+<p>Saludos
+<a href="https://github.com/DarFig">DarFig</a></p>
+                        
                         </div>
                         <br>
                     </div>
@@ -106,7 +133,7 @@
                 </div>
                 <div class=" card-footer is-right">
                     <div class="card-header-title is-centered">
-                        March 5 - 2020
+                        June 13 - 2021
                     </div>
                 </div>
             </div>

@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Blg0</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-ES</language>
-    <lastBuildDate>Fri, 04 Jun 2021 22:49:25 +0200</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Jun 2021 11:57:29 +0200</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Error nss_ldap</title>
+      <link>/posts/errornss_ldap/</link>
+      <pubDate>Sun, 13 Jun 2021 11:57:29 +0200</pubDate>
+      
+      <guid>/posts/errornss_ldap/</guid>
+      <description>&lt;p&gt;Trabajando con libnss-ldap en un servidor ubuntu me he encontrado recientemente un error que puede dar más de un quebradero de cabeza pero realmente es muy sencillo de solucionar.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Tiling Windows Managers</title>
       <link>/posts/mirandotiling/</link>
