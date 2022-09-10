@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Mysql desde tu shell - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -135,24 +135,24 @@
 <h2 id="primero-lo-primero">Primero lo primero</h2>
 <h5 id="instalando"><strong>Instalando</strong></h5>
 <p>Según tu sistema(y si no lo tienes instalado) tendrás que utilizar:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  apt-get -y install mysql-server <span style="color:#75715e">#instalar</span>
-  service mysql start <span style="color:#75715e">#añadir al arranque</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  yum install mysql-server <span style="color:#75715e">#instalar</span>
-  /sbin/service mysqld start <span style="color:#75715e">#arrancar</span>
-  chkconfig mysqld on <span style="color:#75715e">#añadir al arranque</span>
-</code></pre></div><p>O similares para otros sistemas.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  apt-get -y install mysql-server <span style="color:#75715e">#instalar</span>
+</span></span><span style="display:flex;"><span>  service mysql start <span style="color:#75715e">#añadir al arranque</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  yum install mysql-server <span style="color:#75715e">#instalar</span>
+</span></span><span style="display:flex;"><span>  /sbin/service mysqld start <span style="color:#75715e">#arrancar</span>
+</span></span><span style="display:flex;"><span>  chkconfig mysqld on <span style="color:#75715e">#añadir al arranque</span>
+</span></span></code></pre></div><p>O similares para otros sistemas.</p>
 <h2 id="pasemos-al-uso">Pasemos al uso</h2>
 <h3 id="configuración">Configuración</h3>
 <p>Primeramente el root tendrá los permisos y deberás crear las bases y configurar los permisos para otros usuarios usando esta cuenta.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  mysql -u root -p <span style="color:#75715e">#acceso  con la cuenta root</span>
-</code></pre></div><p><strong>Ahora pasamos a un poco de mysql</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">  <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> nombreEjemplo; <span style="color:#f92672">--</span>nueva base
-  <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">USAGE</span> <span style="color:#66d9ef">ON</span> nombreEjemplo.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> nombreUsuario<span style="color:#f92672">@</span>localhost <span style="color:#66d9ef">IDENTIFIED</span> <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;password&#39;</span>; <span style="color:#f92672">--</span>credenciales para otro usuario
-  <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">ALL</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">ON</span> nombreEjemplo.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> nombreUsuario<span style="color:#f92672">@</span>localhost ; <span style="color:#f92672">--</span>cuidado con los privilegios, esto es un ejemplo
-  <span style="color:#66d9ef">FLUSH</span> <span style="color:#66d9ef">PRIVILEGES</span>;
-</code></pre></div><p>Ya lo tenemos configurado, ahora podemos acceder con nuestras <em>nuevas credenciales</em> y listo.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  mysql -u nombreUsuario -p<span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#e6db74">&#39;nombreEjemplo&#39;</span>
-</code></pre></div><p>Saludos
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  mysql -u root -p <span style="color:#75715e">#acceso  con la cuenta root</span>
+</span></span></code></pre></div><p><strong>Ahora pasamos a un poco de mysql</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>  <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> nombreEjemplo; <span style="color:#f92672">--</span>nueva base
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">USAGE</span> <span style="color:#66d9ef">ON</span> nombreEjemplo.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> nombreUsuario<span style="color:#f92672">@</span>localhost <span style="color:#66d9ef">IDENTIFIED</span> <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;password&#39;</span>; <span style="color:#f92672">--</span>credenciales para otro usuario
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">ALL</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">ON</span> nombreEjemplo.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> nombreUsuario<span style="color:#f92672">@</span>localhost ; <span style="color:#f92672">--</span>cuidado con los privilegios, esto es un ejemplo
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">FLUSH</span> <span style="color:#66d9ef">PRIVILEGES</span>;
+</span></span></code></pre></div><p>Ya lo tenemos configurado, ahora podemos acceder con nuestras <em>nuevas credenciales</em> y listo.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  mysql -u nombreUsuario -p<span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#e6db74">&#39;nombreEjemplo&#39;</span>
+</span></span></code></pre></div><p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         
                         </div>

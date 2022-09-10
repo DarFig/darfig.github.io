@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Trabaja en github con autenticación por ssh - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -122,23 +122,22 @@
 <h2 id="proceso">Proceso</h2>
 <h3 id="creando-una-clave-ssh">Creando una clave ssh</h3>
 <p>Si no se ha generado anteriormente el primer paso es generar nuestras claves privada y pública, que se almacenarán en el directorio oculto: <strong>~/.ssh</strong>. Podemos generar nuestras claves mediante:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  cd ~/.ssh
-  ssh-keygen <span style="color:#75715e">#nos pedirá el nombre de los archivos que lo dejaremos por defecto</span>
-             <span style="color:#75715e">#también una contraseña para cifrar nuestra clave, muy recomendable</span>
-  cat id_rsa.pub <span style="color:#75715e">#esto nos muestra la clave pública</span>
-
-</code></pre></div><p>El contenido de id_rsa.pub es nuestra clave pública, su contenido en total es lo que debemos llevar a nuestro perfil de GitHub: dentro de Settings, SSH and GPG keys creamos una nueva clave ssh y pegamos el contenido.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  cd ~/.ssh
+</span></span><span style="display:flex;"><span>  ssh-keygen <span style="color:#75715e">#nos pedirá el nombre de los archivos que lo dejaremos por defecto</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#75715e">#también una contraseña para cifrar nuestra clave, muy recomendable</span>
+</span></span><span style="display:flex;"><span>  cat id_rsa.pub <span style="color:#75715e">#esto nos muestra la clave pública</span>
+</span></span></code></pre></div><p>El contenido de id_rsa.pub es nuestra clave pública, su contenido en total es lo que debemos llevar a nuestro perfil de GitHub: dentro de Settings, SSH and GPG keys creamos una nueva clave ssh y pegamos el contenido.</p>
 <h3 id="agregando-nuestra-clave-al-agente">Agregando nuestra clave al agente</h3>
 <p>Para que nuestra autenticación funcione debemos agregar nuestra clave privada al agente ssh.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  eval <span style="color:#66d9ef">$(</span>ssh-agent -s<span style="color:#66d9ef">)</span> <span style="color:#75715e">#iniciamos el agente de ssh</span>
-  ssh-add ~/.ssh/id_rsa <span style="color:#75715e">#agregamos la clave privada al agente</span>
-                        <span style="color:#75715e">#nos pedirá la contraseña con la que lo ciframos</span>
-</code></pre></div><h3 id="trabajando-con-ssh">Trabajando con ssh</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  eval <span style="color:#66d9ef">$(</span>ssh-agent -s<span style="color:#66d9ef">)</span> <span style="color:#75715e">#iniciamos el agente de ssh</span>
+</span></span><span style="display:flex;"><span>  ssh-add ~/.ssh/id_rsa <span style="color:#75715e">#agregamos la clave privada al agente</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">#nos pedirá la contraseña con la que lo ciframos</span>
+</span></span></code></pre></div><h3 id="trabajando-con-ssh">Trabajando con ssh</h3>
 <p>La próxima vez que clones un repositorio a local utiliza su dirección ssh, que a diferencia de la https utiliza un formato <strong><a href="mailto:git@github.com">git@github.com</a>:user/repositorio.git</strong>. El resto del funcionamiento es idéntico, salvo que no tienes que recurrir a la autenticación por contraseña. Si quieres cambiar la dirección de un repositorio en local entre https o ssh siempre puede recurrir a:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git
-    <span style="color:#75715e">#o</span>
-    git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
-</code></pre></div><p>Saludos
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#o</span>
+</span></span><span style="display:flex;"><span>    git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+</span></span></code></pre></div><p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         
                         </div>

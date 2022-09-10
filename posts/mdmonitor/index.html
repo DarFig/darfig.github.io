@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>mdmonitor - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -127,25 +127,25 @@
 <h4 id="mdadmconf">mdadm.conf</h4>
 <p>Este fichero se puede almacenar en <em>/etc/mdadm/mdadm.conf</em> o en <em>/etc/mdadm.conf</em>. No se genera de manera automática, así que tendremos que añadir ahí nuestras configuraciones cuando generemos nuestro raid.</p>
 <p>Para guardar la configuración de nuestros raids basta con añadir a nuestro fichero la salida del comando:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mdadm --detail --scan 
-</code></pre></div><p><strong>Con esto no basta</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mdadm --detail --scan 
+</span></span></code></pre></div><p><strong>Con esto no basta</strong></p>
 <p>Hasta ahora hemos dicho que hay que monitorizar, pero no como nos alertan.</p>
 <p>La configuración válida más sencilla requiere configurar las alertas por correo. Basta con añadir al inicio del <em>mdadm.conf</em>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">MAILADDR ejemplo@ejemplo.com
-</code></pre></div><p>También es válida una cuenta local, por ejemplo podemos enviar los avisos al root y se generará un fichero en su cuenta con las alertas.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">MAILADDR root
-</code></pre></div><p>Entonces tendríamos un fichero básico de configuración que podría verse así por ejemplo:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># instruct the monitoring daemon where to send mail alerts </span>
-MAILADDR root
-
-<span style="color:#75715e"># definitions of existing MD arrays</span>
-ARRAY /dev/md/raid1 metadata1.2 name<span style="color:#f92672">=</span>host1:raid1 UUID<span style="color:#f92672">=</span>b7de2fc:60b303ac:3c176049:dc5b6c8b
-</code></pre></div><h3 id="arrancando-el-demonio">Arrancando el demonio</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>MAILADDR ejemplo@ejemplo.com
+</span></span></code></pre></div><p>También es válida una cuenta local, por ejemplo podemos enviar los avisos al root y se generará un fichero en su cuenta con las alertas.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>MAILADDR root
+</span></span></code></pre></div><p>Entonces tendríamos un fichero básico de configuración que podría verse así por ejemplo:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># instruct the monitoring daemon where to send mail alerts </span>
+</span></span><span style="display:flex;"><span>MAILADDR root
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># definitions of existing MD arrays</span>
+</span></span><span style="display:flex;"><span>ARRAY /dev/md/raid1 metadata1.2 name<span style="color:#f92672">=</span>host1:raid1 UUID<span style="color:#f92672">=</span>b7de2fc:60b303ac:3c176049:dc5b6c8b
+</span></span></code></pre></div><h3 id="arrancando-el-demonio">Arrancando el demonio</h3>
 <p>Ahora sí podríamos habilitar nuestro <em>mdmonitor</em> y activarlo para que empiece a trabajar.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># por ejemplo en centos</span>
-systemctl enable mdmonitor.service
-systemctl start mdmonitor.service
-</code></pre></div><p><em>Como es obvio hay más opciones disponibles, podemos consultarlas en la documentación. Algunas muy interesantes. Pero esto es lo mínimo necesario para que nuestro mdmonitor funcione.</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># por ejemplo en centos</span>
+</span></span><span style="display:flex;"><span>systemctl enable mdmonitor.service
+</span></span><span style="display:flex;"><span>systemctl start mdmonitor.service
+</span></span></code></pre></div><p><em>Como es obvio hay más opciones disponibles, podemos consultarlas en la documentación. Algunas muy interesantes. Pero esto es lo mínimo necesario para que nuestro mdmonitor funcione.</em></p>
 <p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         

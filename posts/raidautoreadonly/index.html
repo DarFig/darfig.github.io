@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Raid en auto-read-only - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -119,11 +119,10 @@
                         <p>Si manejamos raid software en linux alguna vez nos podemos encontrar con que se nos ha puesto en modo solo lectura.</p>
 <h3 id="auto-read-only">auto-read-only</h3>
 <p>El típico estado <em>active (auto-read-only)</em> que puede aparecer en algún momento. Asumamos que nuestro raid en cuestión es un raid5 llamado <strong>md12</strong>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">md12 : active <span style="color:#f92672">(</span>auto-read-only<span style="color:#f92672">)</span> raid5 sda1<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> sdb1<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> sdc1<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> sdd1<span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> sde1<span style="color:#f92672">[</span>4<span style="color:#f92672">]</span> sdf1<span style="color:#f92672">[</span>5<span style="color:#f92672">]</span> <span style="color:#ae81ff">5555225</span> <span style="color:#f92672">[</span>5/5<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>UUUUU<span style="color:#f92672">]</span>
-
-</code></pre></div><p>La solución a esto es sencilla y rápida. Previamente debemos asegurarnos de que nuestro raid no tenga problemas. Revisar con <strong>mdadm &ndash;detail</strong> el estado y cualquier verificación necesaria. Finalmente lo podemos arreglar con un simple comando:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mdadm --readwrite /dev/md12
-</code></pre></div><p>Podemos verificar que ya no aparece <em>active (auto-read-only)</em> en nuestro raid en el fichero <em>/proc/mdstat</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>md12 : active <span style="color:#f92672">(</span>auto-read-only<span style="color:#f92672">)</span> raid5 sda1<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> sdb1<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> sdc1<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> sdd1<span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> sde1<span style="color:#f92672">[</span>4<span style="color:#f92672">]</span> sdf1<span style="color:#f92672">[</span>5<span style="color:#f92672">]</span> <span style="color:#ae81ff">5555225</span> <span style="color:#f92672">[</span>5/5<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>UUUUU<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>La solución a esto es sencilla y rápida. Previamente debemos asegurarnos de que nuestro raid no tenga problemas. Revisar con <strong>mdadm &ndash;detail</strong> el estado y cualquier verificación necesaria. Finalmente lo podemos arreglar con un simple comando:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mdadm --readwrite /dev/md12
+</span></span></code></pre></div><p>Podemos verificar que ya no aparece <em>active (auto-read-only)</em> en nuestro raid en el fichero <em>/proc/mdstat</em>.</p>
 <p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Error nss_ldap - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -116,13 +116,13 @@
                         <p>Trabajando con libnss-ldap en un servidor ubuntu me he encontrado recientemente un error que puede dar más de un quebradero de cabeza pero realmente es muy sencillo de solucionar.</p>
 <h2 id="el-error">El error</h2>
 <p>Mirando los logs me he encontrado lo siguiente:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nss_ldap: could not connect to any LDAP server as <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span> - Can<span style="color:#960050;background-color:#1e0010">&#39;</span>t contact LDAP server
-</code></pre></div><p>Seguido de algún   que otro fallo más. Aunque todo parece funcionar bien, el fallo es recurrente y está afectando algunos servicios.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nss_ldap: could not connect to any LDAP server as <span style="color:#f92672">(</span>null<span style="color:#f92672">)</span> - Can<span style="color:#960050;background-color:#1e0010">&#39;</span>t contact LDAP server
+</span></span></code></pre></div><p>Seguido de algún   que otro fallo más. Aunque todo parece funcionar bien, el fallo es recurrente y está afectando algunos servicios.</p>
 <h2 id="una-posible-solución-rápida">Una posible solución rápida</h2>
 <p>Después de leer un poco decidí probar a sustituir libnss-ldap con libnss-ldapd.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apt install libnss-ldapd
-systemctl restart systemd-logind
-</code></pre></div><p>Tras la instalación pedirá reconfigurar el servicio, pero si ya teníamos configurado correctamente ldap deberían salirnos las mismas opciones que ya teníamos seleccionadas.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt install libnss-ldapd
+</span></span><span style="display:flex;"><span>systemctl restart systemd-logind
+</span></span></code></pre></div><p>Tras la instalación pedirá reconfigurar el servicio, pero si ya teníamos configurado correctamente ldap deberían salirnos las mismas opciones que ya teníamos seleccionadas.</p>
 <p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         

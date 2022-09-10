@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Configuración rápida de ldap-client - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -117,22 +117,21 @@
 <p>LDAP (Lightweight Directory Access Protocol ) es todo un conjunto de protocolos ampliamente utilizado. En entornos linux concretamente <strong>OpenLDAP</strong> es la implementación más ampliamente usada. En este caso hablaremos de la configuración rápida de un cliente ldap para conectar un nuevo nodo a un servidor openldap.</p>
 <h2 id="ldap-client">LDAP client</h2>
 <p>La instalación de un cliente para ldap es muy sencilla mediante yum, apt, etc. El nombre de los paquetes puede cambiar según nuestra distribución. Por ejemplo en ubuntu server 18.04:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># instalación</span>
-sudo apt install ldap-auth-client nscd
-<span style="color:#75715e"># configuración</span>
-sudo auth-client-config -t nss -p lac_ldap
-
-</code></pre></div><p>Para configuraciones específicas y más avanzadas nos interesará mirar además otros ficheros (más relacionados con la configuración de <strong>pam</strong> ) como:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc/pam.d/common-session <span style="color:#75715e"># añadir: session required pam_mkhomedir.so skel=/etc/skel umask=077</span>
-/etc/pam.d/common-auth
-/usr/share/pam-configs/mkhomedir
-</code></pre></div><p>Finalmente no olvidemos reiniciar los servicios para aplicar los cambios correctamente:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># reconfigurar el pam</span>
-sudo pam-auth-update
-<span style="color:#75715e"># reiniciar nscd</span>
-sudo systemctl restart nscd <span style="color:#75715e"># o /etc/init.d/nscd restart</span>
-sudo systemctl enable nscd
-</code></pre></div><p>Saludos
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># instalación</span>
+</span></span><span style="display:flex;"><span>sudo apt install ldap-auth-client nscd
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># configuración</span>
+</span></span><span style="display:flex;"><span>sudo auth-client-config -t nss -p lac_ldap
+</span></span></code></pre></div><p>Para configuraciones específicas y más avanzadas nos interesará mirar además otros ficheros (más relacionados con la configuración de <strong>pam</strong> ) como:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/etc/pam.d/common-session <span style="color:#75715e"># añadir: session required pam_mkhomedir.so skel=/etc/skel umask=077</span>
+</span></span><span style="display:flex;"><span>/etc/pam.d/common-auth
+</span></span><span style="display:flex;"><span>/usr/share/pam-configs/mkhomedir
+</span></span></code></pre></div><p>Finalmente no olvidemos reiniciar los servicios para aplicar los cambios correctamente:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># reconfigurar el pam</span>
+</span></span><span style="display:flex;"><span>sudo pam-auth-update
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># reiniciar nscd</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart nscd <span style="color:#75715e"># o /etc/init.d/nscd restart</span>
+</span></span><span style="display:flex;"><span>sudo systemctl enable nscd
+</span></span></code></pre></div><p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         
                         </div>

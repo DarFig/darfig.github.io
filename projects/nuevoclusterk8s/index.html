@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Nuevo Clúster K8S - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -219,111 +219,109 @@
 <p>Para empezar recomiendo configurar desde un nodo acceso ssh mediante clave rsa. Luego hay que preparar el load balancer, un runtime(utilizaré containerd), e instalar los componentes en los nodos de kubernetes; finalmente pasar a desplegar y configurar los nodos.</p>
 <h3 id="instalando-el-loadbalancer">Instalando el loadbalancer</h3>
 <p>Para empezar en el loadbalancer <strong>klb-1</strong> instalamos y configuramos el haproxy.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apt update <span style="color:#f92672">&amp;&amp;</span> apt install -y haproxy
-frontend kubernetes-frontend
-    bind 172.17.1.200:6443
-    mode tcp
-    option tcplog
-    default_backend kubernetes-backend
-
-backend kubernetes-backend
-    mode tcp
-    option tcp-check
-    balance roundrobin
-    server kubemaster-1 172.17.1.201:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
-    server kubemaster-2 172.17.1.202:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
-    server kubemaster-3 172.17.1.203:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
-
-</code></pre></div><h3 id="preparando-los-nodos">Preparando los nodos</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt update <span style="color:#f92672">&amp;&amp;</span> apt install -y haproxy
+</span></span><span style="display:flex;"><span>frontend kubernetes-frontend
+</span></span><span style="display:flex;"><span>    bind 172.17.1.200:6443
+</span></span><span style="display:flex;"><span>    mode tcp
+</span></span><span style="display:flex;"><span>    option tcplog
+</span></span><span style="display:flex;"><span>    default_backend kubernetes-backend
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>backend kubernetes-backend
+</span></span><span style="display:flex;"><span>    mode tcp
+</span></span><span style="display:flex;"><span>    option tcp-check
+</span></span><span style="display:flex;"><span>    balance roundrobin
+</span></span><span style="display:flex;"><span>    server kubemaster-1 172.17.1.201:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    server kubemaster-2 172.17.1.202:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    server kubemaster-3 172.17.1.203:6443 check fall <span style="color:#ae81ff">3</span> rise <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><h3 id="preparando-los-nodos">Preparando los nodos</h3>
 <p>Hay que asegurarse de desactivar el swap si existe. En caso de estar utilizando ufw probablemente también nos interese abrir puertos o quitarlo y añadir el firewall por delante del loadbalancer. Asumo que tampoco hay configuraciones raras en el iptables, de todas maneras hay una lista de los puertos requeridos por kubernetes, especialmente en la red de comunicacón entre los nodos.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#swap</span>
-swapoff -a; sed -i <span style="color:#e6db74">&#39;/swap/d&#39;</span> /etc/fstab
-
-<span style="color:#75715e">#ufw</span>
-ufw disable
-</code></pre></div><p>Hay que actualizar también sysctl, para el networking de k8s.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
-</span><span style="color:#e6db74">br_netfilter
-</span><span style="color:#e6db74">EOF</span>
-
-cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
-</span><span style="color:#e6db74">net.bridge.bridge-nf-call-iptables  = 1
-</span><span style="color:#e6db74">net.ipv4.ip_forward                 = 1
-</span><span style="color:#e6db74">net.bridge.bridge-nf-call-ip6tables = 1
-</span><span style="color:#e6db74">EOF</span>
-
-<span style="color:#75715e"># finalmente</span>
-sudo sysctl --system
-</code></pre></div><p>En este caso he decidido usar containerd en lugar de docker como runtime:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install -y containerd
-
-<span style="color:#75715e"># Configure containerd</span>
-sudo mkdir -p /etc/containerd
-containerd config default | sudo tee /etc/containerd/config.toml
-
-<span style="color:#75715e"># Restart containerd</span>
-sudo systemctl restart containerd
-
-
-cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
-</span><span style="color:#e6db74">br_netfilter
-</span><span style="color:#e6db74">EOF</span>
-
-cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/containerd.conf
-</span><span style="color:#e6db74">overlay
-</span><span style="color:#e6db74">br_netfilter
-</span><span style="color:#e6db74">EOF</span>
-
-sudo modprobe overlay
-sudo modprobe br_netfilter
-</code></pre></div><h3 id="setup-de-kubeadm-y-otros-componentes">Setup de kubeadm y otros componentes</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#swap</span>
+</span></span><span style="display:flex;"><span>swapoff -a; sed -i <span style="color:#e6db74">&#39;/swap/d&#39;</span> /etc/fstab
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ufw</span>
+</span></span><span style="display:flex;"><span>ufw disable
+</span></span></code></pre></div><p>Hay que actualizar también sysctl, para el networking de k8s.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">br_netfilter
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.bridge.bridge-nf-call-iptables  = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.ipv4.ip_forward                 = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.bridge.bridge-nf-call-ip6tables = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># finalmente</span>
+</span></span><span style="display:flex;"><span>sudo sysctl --system
+</span></span></code></pre></div><p>En este caso he decidido usar containerd en lugar de docker como runtime:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install -y containerd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Configure containerd</span>
+</span></span><span style="display:flex;"><span>sudo mkdir -p /etc/containerd
+</span></span><span style="display:flex;"><span>containerd config default | sudo tee /etc/containerd/config.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Restart containerd</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart containerd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">br_netfilter
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/containerd.conf
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">overlay
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">br_netfilter
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo modprobe overlay
+</span></span><span style="display:flex;"><span>sudo modprobe br_netfilter
+</span></span></code></pre></div><h3 id="setup-de-kubeadm-y-otros-componentes">Setup de kubeadm y otros componentes</h3>
 <p>Para la instalación hay que seguir las instrucciones de la documentación oficial casi en un paso a paso.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install -y apt-transport-https curl
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
-</span><span style="color:#e6db74">deb https://apt.kubernetes.io/ kubernetes-xenial main
-</span><span style="color:#e6db74">EOF</span>
-sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
-sudo apt-mark hold kubelet kubeadm kubectl
-</code></pre></div><h2 id="creando-y-configurando-el-clúster">Creando y configurando el clúster</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get install -y apt-transport-https curl
+</span></span><span style="display:flex;"><span>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+</span></span><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">deb https://apt.kubernetes.io/ kubernetes-xenial main
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>sudo apt-get install -y kubelet kubeadm kubectl
+</span></span><span style="display:flex;"><span>sudo apt-mark hold kubelet kubeadm kubectl
+</span></span></code></pre></div><h2 id="creando-y-configurando-el-clúster">Creando y configurando el clúster</h2>
 <h3 id="masterscontrollers">Masters/controllers</h3>
 <p>En cualquiera de los nodos master, en mi caso el primero, iniciamos el clúster. Apuntamos a la IP del loadbalancer como endpoint para inicializar.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubeadm init --control-plane-endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;172.17.1.200:6443&#34;</span> --upload-certs --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.201 --pod-network-cidr<span style="color:#f92672">=</span>10.0.0.0/8
-</code></pre></div><p>Nos devolverá el token y los datos que necesitaremos a continuación para añadir nuevos nodos. Copiarlos para luego. Asegurandose de mantener a salvo el token y los certificados.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm init --control-plane-endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;172.17.1.200:6443&#34;</span> --upload-certs --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.201 --pod-network-cidr<span style="color:#f92672">=</span>10.0.0.0/8
+</span></span></code></pre></div><p>Nos devolverá el token y los datos que necesitaremos a continuación para añadir nuevos nodos. Copiarlos para luego. Asegurandose de mantener a salvo el token y los certificados.</p>
 <p><strong>Añadir kubemaster-2 y kubemaster-3</strong></p>
 <p>Es importante recordar que apuntaremos al loadbalancer para unirnos, y además pasaremos la opción &ndash;apiserver-advertise-address= con la ip de cada master.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># kubemaster-2</span>
-sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt; <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --control-plane --certificate-key &lt;key&gt; --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.202
-
-<span style="color:#75715e"># kubemaster-3</span>
-sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt; <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --control-plane --certificate-key &lt;key&gt; --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.203
-</code></pre></div><h3 id="workerscomputers">Workers/computers</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># kubemaster-2</span>
+</span></span><span style="display:flex;"><span>sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --control-plane --certificate-key &lt;key&gt; --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.202
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># kubemaster-3</span>
+</span></span><span style="display:flex;"><span>sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --control-plane --certificate-key &lt;key&gt; --apiserver-advertise-address<span style="color:#f92672">=</span>172.17.1.203
+</span></span></code></pre></div><h3 id="workerscomputers">Workers/computers</h3>
 <p>Para unir nuevos workers utilizamos igualmente el comando con los datos devueltos, en este caso sin las opciones de &ndash;control-plane ni &ndash;apiserver-advertise-address.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt;
-
-</code></pre></div><h3 id="añadir-la-red">Añadir la red</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo kubeadm join 172.17.1.200:6443 --token &lt;token&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    --discovery-token-ca-cert-hash &lt;cert&gt;
+</span></span></code></pre></div><h3 id="añadir-la-red">Añadir la red</h3>
 <p>Finalmente añadiremos el cni para la red interna de kubernetes. En este caso probé en su moento calico, y ahora utilizaré flannel.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo kubectl --kubeconfig<span style="color:#f92672">=</span>/etc/kubernetes/admin.conf create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-</code></pre></div><h2 id="administración">Administración</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo kubectl --kubeconfig<span style="color:#f92672">=</span>/etc/kubernetes/admin.conf create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+</span></span></code></pre></div><h2 id="administración">Administración</h2>
 <h3 id="como-un-usuario-regular">Como un usuario regular</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown <span style="color:#66d9ef">$(</span>id -u<span style="color:#66d9ef">)</span>:<span style="color:#66d9ef">$(</span>id -g<span style="color:#66d9ef">)</span> $HOME/.kube/config
-</code></pre></div><h3 id="remota">Remota</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p $HOME/.kube
+</span></span><span style="display:flex;"><span>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style="display:flex;"><span>sudo chown <span style="color:#66d9ef">$(</span>id -u<span style="color:#66d9ef">)</span>:<span style="color:#66d9ef">$(</span>id -g<span style="color:#66d9ef">)</span> $HOME/.kube/config
+</span></span></code></pre></div><h3 id="remota">Remota</h3>
 <p>Podemos administrar nuestro clúster desde ota máquina copiando la configuración, siempre y cuando tengamos además kubectl instalado en dicha máquina.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir ~/.kube
-scp root@172.17.1.201:/etc/kubernetes/admin.conf ~/.kube/config
-
-<span style="color:#75715e"># probar</span>
-kubectl cluster-info
-kubectl get nodes
-</code></pre></div><hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir ~/.kube
+</span></span><span style="display:flex;"><span>scp root@172.17.1.201:/etc/kubernetes/admin.conf ~/.kube/config
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># probar</span>
+</span></span><span style="display:flex;"><span>kubectl cluster-info
+</span></span><span style="display:flex;"><span>kubectl get nodes
+</span></span></code></pre></div><hr>
 <h2 id="el-cambio-a-k0s">El cambio a K0S</h2>
 <p>Después de un tiempo jugando con kubeadm, y con los componentes por separado, estamos listo para mover nuestro home-clúster a una solución más “empaquetada”. En este caso de paso voy a probar <em>k0s</em>, una solución empaquetada de k8s. Que en su versión actual ya viene con <em>containerd</em> directamente.</p>
 <p>Como principal ventaja es un binario que ya lo hace todo por ti, no tienes que preocuparte por preparar el nodo ni instalar nada en el. Yo personalmente sigo recomendando revisar el tema del swap y del firewall. También es interesante leer atentamente la documentación porque todo dependerá de lo que pongamos en el fichero de configuración, además nos ahorraremos errores tontos porque algunos comandos se esperan una entrada y si está mal recibes muy poca información de que falla, en algunos casos incluso continúa y no te enteras.</p>
@@ -333,54 +331,51 @@ kubectl get nodes
 <ul>
 <li>Empezamos bajándonos el binario y dejándolo en una ruta como un programa más, en cada nodo que queramos que forme parte del clúster. Ahora hay un script para obtener el binario, pero también lo podemos obtener desde github, o incluso compilarlo manualmente.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo mv k0s /usr/local/bin/k0s
-sudo chmod +x /usr/local/bin/k0s
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo mv k0s /usr/local/bin/k0s
+</span></span><span style="display:flex;"><span>sudo chmod +x /usr/local/bin/k0s
+</span></span></code></pre></div><ul>
 <li>Podemos generar el fichero estándar de configuración con un simple comando:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo k0s default-config &gt; k0s.yaml
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo k0s default-config &gt; k0s.yaml
+</span></span></code></pre></div><ul>
 <li>Ahora pasamos al momento en el que podemos personalizar las opciones antes de iniciar el despliegue, y añadir algunos “extras” al clúster, como la instalación de extensiones basadas en helm.</li>
 </ul>
 <p>Añadí metallb como extensión <a href="https://docs.k0sproject.io/v0.11.0/examples/traefik-ingress/?h=+metallb">traefik y metallb</a> pero no añadí traefik porque en este caso voy a utilizar mi propia configuración de traefik más adelante hay otro montón de extensiones y cambios que podemos hacer.</p>
 <p>Si no usamos la configuración por defecto, tenemos que pasar nuestra configuración con la opción <em>-c o &ndash;config</em>. Aquí descubrí que con la opción <em>install</em> tenemos que pasar la ruta absoluta  a los ficheros, porque esto lo que hace es escribir un fichero que luego controlaremos con <em>systemctl</em> y estará escrito tal cual la ruta que pongamos.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo k0s install controller -c /path/absoluto/al/fichero/configuración
-
-sudo systemctl start k0scontroller
-<span style="color:#75715e"># ahora oficialmente hemos arrancado el control-plane con todo</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo k0s install controller -c /path/absoluto/al/fichero/configuración
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo systemctl start k0scontroller
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ahora oficialmente hemos arrancado el control-plane con todo</span>
+</span></span></code></pre></div><ul>
 <li>Podemos utilizar <em>sudo k0s kubectl</em>, o lo que nos interesa para acceso desde otro nodo o con otro usuario:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">clusterUser<span style="color:#f92672">=</span>miuser
-sudo k0s kubeconfig create --groups <span style="color:#e6db74">&#34;system:masters&#34;</span> $clusterUser &gt; k0s.config
-<span style="color:#75715e"># el contenido de este fichero lo podemos poner en ~/.kube/config del usuario</span>
-
-<span style="color:#75715e"># instalamos kubectl, en ubuntu podemos usar snap, o como ya vimos antes cuando kubeadm</span>
-
-<span style="color:#75715e"># y ahora creamos un rol admin</span>
-kubectl create clusterrolebinding --kubeconfig k0s.config testUser-admin-binding --clusterrole<span style="color:#f92672">=</span>admin --user<span style="color:#f92672">=</span>$clusterUser
-
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>clusterUser<span style="color:#f92672">=</span>miuser
+</span></span><span style="display:flex;"><span>sudo k0s kubeconfig create --groups <span style="color:#e6db74">&#34;system:masters&#34;</span> $clusterUser &gt; k0s.config
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># el contenido de este fichero lo podemos poner en ~/.kube/config del usuario</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># instalamos kubectl, en ubuntu podemos usar snap, o como ya vimos antes cuando kubeadm</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># y ahora creamos un rol admin</span>
+</span></span><span style="display:flex;"><span>kubectl create clusterrolebinding --kubeconfig k0s.config testUser-admin-binding --clusterrole<span style="color:#f92672">=</span>admin --user<span style="color:#f92672">=</span>$clusterUser
+</span></span></code></pre></div><ul>
 <li>Añadir workers requiere generar tokens que luego pasaremos al binario en el nodo que será worker.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># en el control-plane</span>
-k0s token create --role<span style="color:#f92672">=</span>worker &gt; token-file
-<span style="color:#75715e"># o siqueremos que expire pasado un timepo</span>
-k0s token create --role<span style="color:#f92672">=</span>worker --expiry<span style="color:#f92672">=</span>100h &gt; token-file
-
-<span style="color:#75715e"># en el nuevo worker</span>
-k0s install worker --token-file /path/to/token/file
-
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># en el control-plane</span>
+</span></span><span style="display:flex;"><span>k0s token create --role<span style="color:#f92672">=</span>worker &gt; token-file
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># o siqueremos que expire pasado un timepo</span>
+</span></span><span style="display:flex;"><span>k0s token create --role<span style="color:#f92672">=</span>worker --expiry<span style="color:#f92672">=</span>100h &gt; token-file
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># en el nuevo worker</span>
+</span></span><span style="display:flex;"><span>k0s install worker --token-file /path/to/token/file
+</span></span></code></pre></div><ul>
 <li>Para añadir un nuevo nodo control-plane la teoría dice que es igual que con los workers, pero antes revisemos la documentación del <em>clusterHA</em> y recomendaciones específicas, si nos interesa.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># en el control-plane</span>
-k0s token create -c /path/configuración --role<span style="color:#f92672">=</span>controller --expiry<span style="color:#f92672">=</span>1h &gt; token-control 
-
-<span style="color:#75715e"># en el nuevo worker</span>
-k0s install controller --token-file /path/to/token/file
-
-</code></pre></div><h3 id="despliegue-a-lo-bestia-instalación-automática">Despliegue a lo bestia (instalación &ldquo;automática&rdquo;)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># en el control-plane</span>
+</span></span><span style="display:flex;"><span>k0s token create -c /path/configuración --role<span style="color:#f92672">=</span>controller --expiry<span style="color:#f92672">=</span>1h &gt; token-control 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># en el nuevo worker</span>
+</span></span><span style="display:flex;"><span>k0s install controller --token-file /path/to/token/file
+</span></span></code></pre></div><h3 id="despliegue-a-lo-bestia-instalación-automática">Despliegue a lo bestia (instalación &ldquo;automática&rdquo;)</h3>
 <h4 id="antecedentes"><strong>Antecedentes</strong></h4>
 <p>Venimos de desplegar manualmente el clúster de <em>k0s</em>, cosa que recomiendo hacer al menos una vez con un par de nodos si quieres entender como funciona por detrás lo que vamos a usar a partir de ahora.</p>
 <p>Bien, durante este despliegue manual no mencioné nada de <em>High availability (HA)</em>, hay algo que hay que entender, para que un clúster tenga HA debemos tener un “punto único de acceso” al plano de control desde el exterior pero por detrás serán  múltiples nodos. Esto en <em>kubeadm</em> lo conseguíamos con un nodo <em>load balancer (lb)</em> y <em>proxy HA</em> que recibe las peticiones y las envía al backend de nodos de control. En <em>k0s</em> también recuperaremos dicho nodo y vamos a configurarlo según los puertos requeridos. (Recomendaría poner por delante del lb- HA algún control de tráfico como un firewall si queremos asegurarnos de a que tráfico se le permite acceder a ciertos puertos del clúster)</p>
@@ -393,52 +388,52 @@ k0s install controller --token-file /path/to/token/file
 <p>Luego instalamos <em>k0sctl</em> en un nodo con acceso ssh con certificado(necesitará root o sudo sin password así que cuidado) que como <em>k0s</em> es bajarte el binario oficial o compilarlo desde fuentes, está todo en su repositorio.</p>
 <p><strong>Configuración</strong></p>
 <p>Bueno la configuración consiste en un yaml como los que se utilizan en k8s normalmente, así que guay.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># podemos obtener una configuración de despliegue base</span>
-k0sctl init
-<span style="color:#75715e"># con --k0s podemos pasar nuestra configuración de nodos para que la tenga en cuenta </span>
-</code></pre></div><p>La cosa es que nos quedará un yaml donde tendremos los nodos con sus IPs  sus roles, y debajo lo que en la instalación  manual era la configuración que pasamos al binario de k0s (con algunos matices). <strong>Importante hay que ver que el load balancer no es un host con rol del clúster, se añade a la configuración de k0s como “externalAddress” ver un <a href="https://docs.k0sproject.io/main/configuration/">ejemplo de configuración de nodo</a></strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">k0sctl.k0sproject.io/v1beta1</span>
-<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Cluster</span>
-<span style="color:#f92672">metadata</span>:
-  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-k0s-cluster</span>
-<span style="color:#f92672">spec</span>:
-  <span style="color:#f92672">hosts</span>:
-  - <span style="color:#f92672">role</span>: <span style="color:#ae81ff">controller</span>
-    <span style="color:#f92672">ssh</span>:
-      <span style="color:#f92672">address</span>: <span style="color:#ae81ff">10.0.0.1</span>
-      <span style="color:#f92672">user</span>: <span style="color:#ae81ff">root</span>
-      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">22</span>
-      <span style="color:#f92672">keyPath</span>: <span style="color:#ae81ff">~/.ssh/id_rsa</span>
-  - <span style="color:#f92672">role</span>: <span style="color:#ae81ff">worker</span>
-<span style="color:#ae81ff">(...)</span>
-<span style="color:#f92672">k0s</span>:
-    <span style="color:#f92672">version</span>: <span style="color:#ae81ff">0.13.1</span>
-    <span style="color:#f92672">config</span>:
-      <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">k0s.k0sproject.io/v1beta1</span>
-      <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Cluster</span>
-      <span style="color:#f92672">metadata</span>:
-        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-k0s-cluster</span>
-      <span style="color:#f92672">spec</span>:
-          <span style="color:#f92672">api</span>:
-              <span style="color:#f92672">port</span>: <span style="color:#ae81ff">6443</span>
-              <span style="color:#f92672">k0sApiPort</span>: <span style="color:#ae81ff">9443</span>
-              <span style="color:#f92672">externalAddress</span>: <span style="color:#ae81ff">my-lb-address.example.com o x.x.x.x</span>
-<span style="color:#ae81ff">(...)</span>
-</code></pre></div><p>Bueno ya aquí cada cual tiene que mirarse la documentación y ver que y como lo configura.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># podemos obtener una configuración de despliegue base</span>
+</span></span><span style="display:flex;"><span>k0sctl init
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># con --k0s podemos pasar nuestra configuración de nodos para que la tenga en cuenta </span>
+</span></span></code></pre></div><p>La cosa es que nos quedará un yaml donde tendremos los nodos con sus IPs  sus roles, y debajo lo que en la instalación  manual era la configuración que pasamos al binario de k0s (con algunos matices). <strong>Importante hay que ver que el load balancer no es un host con rol del clúster, se añade a la configuración de k0s como “externalAddress” ver un <a href="https://docs.k0sproject.io/main/configuration/">ejemplo de configuración de nodo</a></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">k0sctl.k0sproject.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-k0s-cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">role</span>: <span style="color:#ae81ff">controller</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ssh</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">address</span>: <span style="color:#ae81ff">10.0.0.1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">user</span>: <span style="color:#ae81ff">root</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">keyPath</span>: <span style="color:#ae81ff">~/.ssh/id_rsa</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">role</span>: <span style="color:#ae81ff">worker</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">(...)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">k0s</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">version</span>: <span style="color:#ae81ff">0.13.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">config</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">k0s.k0sproject.io/v1beta1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Cluster</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">my-k0s-cluster</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">api</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">port</span>: <span style="color:#ae81ff">6443</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">k0sApiPort</span>: <span style="color:#ae81ff">9443</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">externalAddress</span>: <span style="color:#ae81ff">my-lb-address.example.com o x.x.x.x</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">(...)</span>
+</span></span></code></pre></div><p>Bueno ya aquí cada cual tiene que mirarse la documentación y ver que y como lo configura.</p>
 <p><strong>Despliegue</strong></p>
 <p>Hemos llegado al momento, pero realmente no tiene misterio, hay algunas opciones, pero es tan simple como:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># despliegue y configuración</span>
-k0sctl apply --config path/to/k0sctl.yaml
-
-<span style="color:#75715e"># desinstalar de los nodos indicados</span>
-k0sctl reset --config path/to/k0sctl.yaml
-</code></pre></div><p>Y aquí lo útil es que si el clúster ya existe y cambiamos la versión en nuestro yaml lo cambiará a dicha versión, si añadimos un host nuevo lo añadirá al clúster, y realmente espero que esta herramienta siga evolucionando. Todo con una sintaxis como la que ya conocemos de kubectl.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Para administrar nuestro clúster podemos obtener la configuración con:</span>
-k0sctl kubeconfig --config path/to/k0sctl.yaml &gt; k0s.config
-
-<span style="color:#75715e"># luego lo añadimos a kubectl, o a k8s-lens del que hablaré luego</span>
-</code></pre></div><p>Con esto tendremos nuestro clúster HA, funcionando y listo para empezar a añadir cosas y jugar un poco.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># despliegue y configuración</span>
+</span></span><span style="display:flex;"><span>k0sctl apply --config path/to/k0sctl.yaml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># desinstalar de los nodos indicados</span>
+</span></span><span style="display:flex;"><span>k0sctl reset --config path/to/k0sctl.yaml
+</span></span></code></pre></div><p>Y aquí lo útil es que si el clúster ya existe y cambiamos la versión en nuestro yaml lo cambiará a dicha versión, si añadimos un host nuevo lo añadirá al clúster, y realmente espero que esta herramienta siga evolucionando. Todo con una sintaxis como la que ya conocemos de kubectl.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Para administrar nuestro clúster podemos obtener la configuración con:</span>
+</span></span><span style="display:flex;"><span>k0sctl kubeconfig --config path/to/k0sctl.yaml &gt; k0s.config
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># luego lo añadimos a kubectl, o a k8s-lens del que hablaré luego</span>
+</span></span></code></pre></div><p>Con esto tendremos nuestro clúster HA, funcionando y listo para empezar a añadir cosas y jugar un poco.</p>
 <p><strong>continuará&hellip;</strong></p>
 <p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>

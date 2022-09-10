@@ -1,7 +1,7 @@
 baseURL = ""
 languageCode = "es-ES"
 title = "Blg0"
-theme = "darfig-hugo-theme"
+theme = "darfig-theme"
 publishdir = "."
 
 [params]

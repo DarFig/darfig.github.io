@@ -1,0 +1,3 @@
+[submodule "themes/darfig-theme"]
+	path = themes/darfig-theme
+	url = git@github.com:DarFig/darfig-theme.git

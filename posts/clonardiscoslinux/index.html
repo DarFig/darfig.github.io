@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Clonar Discos en Linux - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -131,21 +131,19 @@
 <h3 id="clonando">Clonando</h3>
 <p>El comando <strong>dd</strong> tiene una sintaxis simple <strong>dd if=origen of=destino</strong> y requiere permisos así que utilizaremos sudo o root. Una opción que puede ser interesante tener en cuenta es <em>bs</em> que define los bytes que se utilizarán para leer y escribir cada vez. Es como definir un tamaño de bloque y cada operación de lectura/escritura será de 1 bloque. Esto quiere decir que bloques grandes disminuirán el tiempo de copia pero también disminuirán la precisión, lo que puede provocar errores o perdidas de datos. El tamaño por defecto es de 512 bytes.</p>
 <p>Así, si queremos copiar sda en sde nos quedaría:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/sda of<span style="color:#f92672">=</span>/dev/sde
-<span style="color:#75715e"># o</span>
-sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/sda of<span style="color:#f92672">=</span>/dev/sde bs<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>
-<span style="color:#75715e"># cuando termine se pude comprobar la copia</span>
-sudo fdisk -l /dev/sda /dev/sde
-
-</code></pre></div><h3 id="puede-ser-interesante">Puede ser interesante</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/sda of<span style="color:#f92672">=</span>/dev/sde
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># o</span>
+</span></span><span style="display:flex;"><span>sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/sda of<span style="color:#f92672">=</span>/dev/sde bs<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cuando termine se pude comprobar la copia</span>
+</span></span><span style="display:flex;"><span>sudo fdisk -l /dev/sda /dev/sde
+</span></span></code></pre></div><h3 id="puede-ser-interesante">Puede ser interesante</h3>
 <p>Si copiamos con origen /dev/null, /dev/zero, o similar borraremos todo el contenido del destino. Pero puede ser útil.</p>
 <p>Por ejemplo si queremos crear un fichero de swap:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>/swapfile bs<span style="color:#f92672">=</span>4k count<span style="color:#f92672">=</span>2048M
-mkswap /swapfile
-swapon /swapfile
-
-</code></pre></div><p>Saludos
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>/swapfile bs<span style="color:#f92672">=</span>4k count<span style="color:#f92672">=</span>2048M
+</span></span><span style="display:flex;"><span>mkswap /swapfile
+</span></span><span style="display:flex;"><span>swapon /swapfile
+</span></span></code></pre></div><p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         
                         </div>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 
 <title>Desactivar el inicio de entorno gráfico por defecto - Blg0</title>
-<meta name="generator" content="Hugo 0.83.1" />
+
 <body class="grisOscuro"><nav class="lateral-navbar">
 
   <ul class="lateral-navbar-nav bordeVerde">
@@ -121,10 +121,9 @@
 <h3 id="modificando-opciones-de-arranque">Modificando opciones de arranque</h3>
 <p>Necesitaremos tener permisos ya sea como root, o con acceso a sudo. Entramos en la consola y modificaremos con nuestro editor favorito (vi, nano, etc) el fichero <strong>/etc/inittab</strong>. Una de las primeras lineas es <strong>id:2:initdefault:</strong>, o algo similar y lo sustituimos por  <strong>id:3:initdefault:</strong>, básicamente es cambiar el 2 por el 3. XD</p>
 <p>Ahora modifiquemos el gestor de sesión. Cambiamos de directorio a <strong>/etc/rc3.d</strong>. Si ejecutamos un <strong>ls -l</strong> o  <strong>ls -al</strong> , veremos dependiendo de si tenemos GNOME, XFCE, u otros uno de los siguientes archivos: <strong>S19gdm3</strong>, <strong>S04lightdm</strong> o similares, y debemos sustituir la <strong>S</strong> por una <strong>k</strong>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  mv S19gdm3 K19gdm3 <span style="color:#75715e">#según sea el caso</span>
-  mv S04lightdm  K04lightdm
-
-</code></pre></div><p>Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno gráfico en cualquier momento utilizando el comando <strong>startx</strong>, o ejecutando nuestro gestor por ejemplo <strong>/etc/init.d/gdm3 start</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  mv S19gdm3 K19gdm3 <span style="color:#75715e">#según sea el caso</span>
+</span></span><span style="display:flex;"><span>  mv S04lightdm  K04lightdm
+</span></span></code></pre></div><p>Con esto iniciaremos por defecto en linea de comandos. Podremos arrancar el entorno gráfico en cualquier momento utilizando el comando <strong>startx</strong>, o ejecutando nuestro gestor por ejemplo <strong>/etc/init.d/gdm3 start</strong>.</p>
 <p>Saludos
 <a href="https://github.com/DarFig">DarFig</a></p>
                         
